@@ -1,1 +1,1 @@
-#Group Activity: React Slack Clone
+# Group Activity: React Slack Clone
