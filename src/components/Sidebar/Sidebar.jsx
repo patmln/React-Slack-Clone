@@ -10,11 +10,15 @@ import {
   NewChannels,
   ChannelContainer,
 } from './style'
+import React, { useState } from 'react'
+import CreateChannel from '../CreateChannel/CreateChannel'
 
 const Sidebar = () => {
   const addChannel = () => {
     const promptName = prompt('Enter channel name')
   }
+
+  const [show, setShow] = useState(false)
 
   return (
     <Container>
@@ -35,7 +39,8 @@ const Sidebar = () => {
       <ChannelContainer>
         <NewChannels>
           <div>Channels</div>
-          <AddIcon onClick={addChannel}/>
+          <AddIcon onClick={() => setShow(true)}/>
+          <CreateChannel onClose={() => setShow(false)} show={show}/>
         </NewChannels>
         <div className='ChannelList'>
           {/* {rooms.map(({name, id})=> (  */}
