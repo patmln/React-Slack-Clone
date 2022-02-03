@@ -43,9 +43,6 @@ export default() => {
           </Main>
         </Container>
       }</BrowserRouter>
-    </div>
-  )
-}
 
 const Container = styled.div`
   width: 100%;
