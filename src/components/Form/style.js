@@ -39,7 +39,6 @@ export const Input = styled.input`
     font-weight: 500;
   }
 `
-
 export const Button = styled.button`
   color: #fff;
   width: 125px;

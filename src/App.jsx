@@ -4,6 +4,7 @@ import {useState} from 'react'
 import Sidebar from './components/Sidebar/Sidebar'
 import Header from './components/Header/Header'
 import Login from './components/Login/Login'
+import Register from './components/Register/Register'
 import Chat from './components/Chat/Chat'
 
 import styled from 'styled-components'
@@ -29,8 +30,8 @@ export default () => {
 
   return (
     <div className="App">
-      <BrowserRouter>{
-        !localStorage.user ? <Login setUser={setUser} /> : 
+      {/* <BrowserRouter>{
+        !localStorage.user ? <Login setUser={setUser} /> :
         <Container>
           <Header user={user}/>
           <Main>
@@ -43,7 +44,13 @@ export default () => {
             </Routes>
           </Main>
         </Container>
-      }</BrowserRouter>
+      }</BrowserRouter> */}
+      <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="register" element={<Register/>}/>
+      </Routes>
+    </BrowserRouter>
     </div>
   )
 }
