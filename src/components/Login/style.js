@@ -22,5 +22,23 @@ export const Content = styled.div`
 `
 
 export const Logo = styled.img`
-  height: 100px;
+  height: 40px;
+  margin-bottom: 40px
+`
+export const TextHeader = styled.div`
+  font-family: 'Lato', sans-serif;
+  font-size: 27px;
+  margin-bottom: 30px;
+  font-weight: bold
+`
+export const TextFooter = styled.div`
+  font-family: 'Lato', sans-serif;
+  padding-top: 30px;
+  font-size: 13px;
+  display: block;
+`
+export const LinkText = styled.div`
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  display: block;
 `
