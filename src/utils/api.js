@@ -1,20 +1,15 @@
-const baseUrl = 'http://206.189.91.54//api/v1/' 
-const jsonType = 'application/json'
-const headers = { 
-  'Content-Type': jsonType, 
-}
+const API_URI = process.env.REACT_APP_API_URI
+const headers = { 'Content-Type': 'application/json' }
 
 export const register = async (userData) => {
-  const {stringify} = JSON
   const options = {
     method: 'POST',
     headers: headers,
-    body: stringify(userData),
+    body: JSON.stringify(userData),
   }
 
   try {
-    const res = await fetch(`${baseUrl}/auth`, options)
-    console.log(res) 
+    const res = await fetch(`${API_URI}auth`, options)
     const data = await res.json()
     console.log(data)
   } catch(err) {
@@ -23,18 +18,18 @@ export const register = async (userData) => {
 }
 
 export const login = async (userData) => {
-  console.log('login')
-  const {stringify} = JSON
   const options = {
     method: 'POST',
     headers: headers,
     redirect: 'follow',
-    body: stringify(userData)
+    body: JSON.stringify(userData)
   }
 
   try {
-    const res = await fetch(`${baseUrl}/auth/sign_in`, options)
+    const res = await fetch(
+      `${API_URI}auth/sign_in`, options)
     const authData = {}
+
     for (const [key, value] of res.headers.entries()) {
       switch (key) {
         case 'access-token':
@@ -59,15 +54,15 @@ export const login = async (userData) => {
   }
 }
 export const sendMessage = async (authData, message) => {
-  const {stringify} = JSON
   const options = {
     method: 'POST',
     headers: authData,
-    body: stringify(message),
+    body: JSON.stringify(message),
   }
 
   try {
-    const res = await fetch(`${baseUrl}/messages`, options)
+    const res = await fetch(
+      `${API_URI}messages`, options)
     console.log(res)
   } catch(err) {
     console.log(err)
@@ -75,14 +70,13 @@ export const sendMessage = async (authData, message) => {
 }
 
 export const getMessages = async (authData, receiverId) => {
-  const {stringify} = JSON
   const options = {
     method: 'GET',
     headers: authData,
   }
 
   try {
-    const res = await fetch(`${baseUrl}/messages?receiver_class=User&receiver_id=${receiverId}`, options)
+    const res = await fetch(`${API_URI}messages?receiver_class=User&receiver_id=${receiverId}`, options)
     const data = await res.json()
     return data
   } catch(err) {

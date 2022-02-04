@@ -1,6 +1,33 @@
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
+import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+const Header = ({signOut}) => {
+  return (
+    <Container>
+      <Main>
+        <AccessTimeIcon/>
+        <SearchBox>
+          <Search>
+            <input type="text" placeholder="Search..."/>
+          </Search>
+        </SearchBox>
+        <HelpOutlineIcon/>
+      </Main>
+      <UserContent>
+        <Name>Name</Name>
+        <Image onClick={signOut}>
+          <img src="https://i.imgur.com/6VBx3io.png"/>
+        </Image>
+      </UserContent>
+    </Container>
+  )
+}
+
+export default Header
+
+// Styles
+const Container = styled.div`
   color: #FFF;
   z-index: 10;
   display: flex;
@@ -11,19 +38,19 @@ export const Container = styled.div`
   box-shadow: 0 1px 0 0 rgba(225, 225, 225, 0.1);
 `
 
-export const Main = styled.div`
+const Main = styled.div`
   display: flex;
   margin-left: 16px;
   margin-right: 16px;
 `
 
-export const SearchBox = styled.div`
+const SearchBox = styled.div`
   min-width: 400px;
   margin-left: 16px;
   margin-right: 16px;
 `
 
-export const Search = styled.div`
+const Search = styled.div`
   width: 100%;
   border-radius: 6px;
   box-shadow: inset 0 0 0 1px rgb(104, 74, 105);
@@ -38,7 +65,7 @@ export const Search = styled.div`
     &:focus { outline: none; }
   }
 `
-export const UserContent = styled.div`
+const UserContent = styled.div`
   align-items: center;
   padding-right: 16px;
   position: absolute;
@@ -47,9 +74,9 @@ export const UserContent = styled.div`
   h4 { padding-right: 16px; }
 `
 
-export const Name = styled.h4``
+const Name = styled.h4``
 
-export const Image = styled.div`
+const Image = styled.div`
   height: 28px;
   width: 28px;
   border: 2px solid #FFF;

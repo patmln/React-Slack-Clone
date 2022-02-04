@@ -17,6 +17,7 @@ export default({setUser}) => {
     }
 
     const data = await login(user)
+    localStorage.setItem('user', JSON.stringify(data))
     setUser(data)
   }
 

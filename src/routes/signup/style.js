@@ -21,73 +21,68 @@ export const Content = styled.div`
     0 1px 2px rgba(0, 0, 0, 0.24);
 `
 
-export const PageHeader = styled.div`
-margin: 2% auto;
-width: 100%;
-padding-top: 20px;
-display: flex;
-align-items: center;
-justify-content: center
+export const Header = styled.div`
+  width: 100%;
+  display: flex;
+  margin: 2% auto;
+  padding-top: 20px;
+  align-items: center;
+  justify-content: center;
 `
 
-export const LogoContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 20px;
+export const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+  img{ height: 40px; }
 `
 
 export const RegisterMain = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 `
 
 export const RegisterBoard = styled.div`
-text-align: center;
-height: 50vh;
-width: 330px;
+  height: 50vh;
+  width: 330px;
+  text-align: center;
 `
 export const RegisterTextSubHeading = styled.div`
   font-size: 15px;
   padding-bottom: 10px;
 `
 
-export const RegisterInputs = styled.div`
-  input {
-    width: 91%;
-    margin-top:10px;
-    padding: 10px;
-    border: 1px solid grey;
-    border-radius: 3px;
-    &:hover { box-shadow: 0 3px 10px rgb(0 0 0 / 0.2) }
-  }
+export const RegisterInput = styled.input`
+  width: 91%;
+  margin-top:10px;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  &:hover { box-shadow: 0 3px 10px rgb(0 0 0 / 0.2) }
 `
-export const RegisterButtons = styled.div`
-  button{
-    background: #3f0f40;
-    color: #fff;
-    border: none;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    cursor: pointer;
-    width: 95%;
-    padding:10px;
-    font-weight: bold;
-    border-radius: 3px;
-    &:hover{ background:#0A8D48; }
-  }
+export const SignUpButton = styled.button`
+  background: #3f0f40;
+  color: #fff;
+  border: none;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 95%;
+  padding:10px;
+  font-weight: bold;
+  border-radius: 3px;
+  &:hover{ background:#0A8D48; }
 `
-export const TextInstructions = styled.div`
-  font-family: 'Lato', sans-serif;
+export const Instructions = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:flex-start;
-  color:grey;
+  color: grey;
   border-radius: 8px;
   font-size: 15px;
   font-weight: 400;
-  line-height: 1.46668;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 
   span{
     font-size: 13x;
@@ -97,30 +92,29 @@ export const TextInstructions = styled.div`
   input{
     width: 15px;
     height: 15px;
-    margin-left: 0;
     cursor: pointer;
+    margin-right: 10px;
   }
 `
 
 export const Terms = styled.div`
   text-align: center;
   font-size: 13px;
-  a{
-    text-decoration: none;
+  a {
     color: grey;
+    text-decoration: none;
     &:hover{ text-decoration: underline; }
   }
 `
 
 export const PageFooter = styled.div`
-  display: flex;
   width: 100%;
+  border: none;
+  display: flex;
+  font-size: 15px;
+  text-align: center;
   align-content: center;
   justify-content: center;
-  font-size: 15px;
-  border: none;
-  text-align: center;
-
   span{
     margin-right: 10px;
     font-size:12px;

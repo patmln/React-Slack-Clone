@@ -2,22 +2,15 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import AddIcon from '@material-ui/icons/Add'
 import {sidebarData} from './data'
 import {
-  Container,
-  Workspace,
-  NewMessage,
-  MainChannels,
-  ChannelItem,
-  NewChannels,
+  Container, Workspace,
+  NewMessage, MainChannels,
+  ChannelItem, NewChannels,
   ChannelContainer,
 } from './style'
-import React, { useState } from 'react'
-import CreateChannel from '../CreateChannel/CreateChannel'
+import {useState} from 'react'
+import AddChannelModal from '../CreateChannel/AddChannelModal'
 
 const Sidebar = () => {
-  const addChannel = () => {
-    const promptName = prompt('Enter channel name')
-  }
-
   const [show, setShow] = useState(false)
 
   return (
@@ -40,7 +33,8 @@ const Sidebar = () => {
         <NewChannels>
           <div>Channels</div>
           <AddIcon onClick={() => setShow(true)}/>
-          <CreateChannel onClose={() => setShow(false)} show={show}/>
+          <AddChannelModal 
+            onClose={() => setShow(false)} show={show}/>
         </NewChannels>
         <div className='ChannelList'>
           {/* {rooms.map(({name, id})=> (  */}

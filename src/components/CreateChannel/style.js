@@ -49,10 +49,10 @@ export const ModalClose = styled.button`
 ` 
 
 export const ModalBody = styled.div`
-padding-top: 20px;
+  padding-top: 20px;
 `
 
-export const ModalInfo = styled.p`
+export const Info = styled.p`
   color: gray;
   font-size: 14px;
 ` 
@@ -62,7 +62,7 @@ export const ModalOptional = styled.span`
   margin-top: 30px;
 ` 
 
-export const ModalDescription = styled.div`
+export const Description = styled.div`
   display: flex;
   align-items: center;
 ` 
@@ -97,9 +97,7 @@ export const ModalInputName = styled.input`
   border-radius: 0px 4px 4px 0px;
   border-left-style: none;
   border-left-radius: none;
-  &:focus {
-    outline: none;
-  }
+  &:focus { outline: none; }
 `
 
 export const ModalInput = styled.input`
@@ -107,9 +105,7 @@ export const ModalInput = styled.input`
   padding: 10px 10px;
   border: 1px solid gray;
   border-radius: 4px;
-  &:focus {
-    outline: none;
-  }
+  &:focus { outline: none; }
 `
 
 export const ModalPrivate = styled.div`

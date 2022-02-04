@@ -1,22 +1,23 @@
-import React, { useState } from "react"
+import {useState} from 'react'
 import {
-  Modal, ModalContent, ModalHeader, 
-  ModalTitle, ModalClose, ModalBody,
-  ModalDescription, ModalInfo, ModalLabel, 
-  ModalName, ModalInputStart, ModalInputName,
+  Modal, ModalContent, 
+  ModalHeader, ModalTitle, 
+  ModalClose, ModalBody,
+  ModalDescription, ModalInfo, 
+  ModalLabel, ModalName, 
+  ModalInputStart, ModalInputName,
   ModalInput, ModalOptional, ModalP,
-  ModalPrivate, ModalPrivateInfo, ModalCheckbox, 
-  ModalLearn, ModalCreate, ModalFooter 
+  ModalPrivate, ModalPrivateInfo, 
+  ModalCheckbox, ModalLearn, 
+  ModalCreate, ModalFooter 
 } from './style.js'
 
 
-const CreateChannel = props => {
+const AddChannelModal = props => {
   //const createChannelHandler
     //fetch api
   
-  if (!props.show) {
-    return null
-  }
+  if (!props.show) return null
 
   return (
     <Modal onClick={props.onClose}>
@@ -26,10 +27,10 @@ const CreateChannel = props => {
           <ModalClose onClick={props.onClose}>&times;</ModalClose>
         </ModalHeader>
         <ModalBody>
-          <ModalInfo>
+          <Info>
             Channels are where your team communicates. They're best when
             organized around a topic - #marketing, for example.
-          </ModalInfo>
+          </Info>
           <ModalLabel>Name</ModalLabel>
           <ModalName>
             <ModalInputStart>#</ModalInputStart>
@@ -37,10 +38,10 @@ const CreateChannel = props => {
                 placeholder="e.g. plan-budget">    
             </ModalInputName>
           </ModalName>
-          <ModalDescription>
+          <Description>
             <ModalLabel>Description</ModalLabel>
             <ModalOptional>(optional)</ModalOptional>
-          </ModalDescription>
+          </Description>
           <ModalInput></ModalInput>
           <ModalP>What's this channel about?</ModalP>
           <ModalLabel>Make private</ModalLabel>
@@ -61,4 +62,4 @@ const CreateChannel = props => {
   )
 }
 
-export default CreateChannel
+export default AddChannelModal

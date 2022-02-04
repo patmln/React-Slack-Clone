@@ -1,6 +1,4 @@
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import ChatMessage from './ChatMessage/ChatMessage'
-import ChatInput from './ChatInput/ChatInput'
 import {getMessages} from '../../utils/api'
 import {useEffect, useState} from 'react'
 import {
@@ -9,6 +7,9 @@ import {
   Header, ChannelName,
   ChannelInfo, ChannelDetails,
 } from './style'
+
+import ChatMessage from './ChatMessage'
+import ChatInput from './ChatInput'
 
 const Chat = ({user}) => {
   const {authData} = user

@@ -1,11 +1,11 @@
-import {FiGlobe} from 'react-icons/fi'
 import {VscChevronDown} from 'react-icons/vsc'
+import {FiGlobe} from 'react-icons/fi'
 import { 
   PageFooter,
   FooterChild
 } from './style'
 
-const RegisterFooter = () => (
+const Footer = () => (
   <PageFooter>
     <FooterChild>
       <span >
@@ -17,7 +17,9 @@ const RegisterFooter = () => (
       <span>
         <a href="/"> 
           <FiGlobe/>
-          <span className="regionLabel">Change region</span> 
+          <span className="regionLabel">
+            Change region
+          </span> 
           <VscChevronDown/>
         </a> 
       </span>
@@ -25,4 +27,4 @@ const RegisterFooter = () => (
   </PageFooter>
 )
 
-export default RegisterFooter
+export default Footer

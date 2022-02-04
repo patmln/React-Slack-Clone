@@ -57,5 +57,3 @@ export const NewChannels = styled.div`
 
   .MuiSvgIcon-root { cursor: pointer; }
 `
-
-
