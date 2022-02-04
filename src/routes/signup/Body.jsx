@@ -1,3 +1,4 @@
+import {register} from '../../utils/api'
 import {
   RegisterMain, RegisterBoard,
   RegisterInput, SignUpButton,
@@ -5,11 +6,21 @@ import {
   Instructions, Terms
 } from './style'
 
-const Body = props => {
-  const {
-    setEmail, setPassword, 
-    setConfirmPassword
-  } = props
+const Body = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const handleSubmit = e => {
+    if(!email || !password || !confirmPassword) return
+
+    const newUser = {
+      'email': email,
+      'password': password,
+      'password_confirmation': confirmPassword
+    }
+    register(newUser) 
+  }
 
   return (
     <RegisterMain>
@@ -18,21 +29,21 @@ const Body = props => {
           We suggest using the <strong>email address you use at work.</strong>
         </RegisterTextSubHeading>
         <RegisterInput
-          type="email" 
-          placeholder="name@work-email.com"
+          type='email'
+          placeholder='name@work-email.com'
           onChange={e => setEmail(e.target.value)}
         />
         <RegisterInput
-          type="text" 
-          placeholder="Enter your password"
+          type='text'
+          placeholder='Enter your password'
           onChange={e => setPassword(e.target.value)}
         />
         <RegisterInput
-          type="text" 
-          placeholder="Confirm password"
+          type='text'
+          placeholder='Confirm password'
           onChange={e => setConfirmPassword(e.target.value)}
         />
-        <SignUpButton onClick={() => {}}>Sign Up</SignUpButton> 
+        <SignUpButton onClick={handleSubmit}>Sign Up</SignUpButton> 
         <Instructions>
           <span> 
             <input type="checkbox" name="emailnotifs" id="emailnotifs"/> 

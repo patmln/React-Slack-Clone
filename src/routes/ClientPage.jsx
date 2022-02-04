@@ -5,13 +5,17 @@ import {useState} from 'react'
 
 // COMPONENTS
 import Sidebar from '../components/Sidebar/Sidebar'
-import Chat from '../components/Chat/Chat'
-import Header from '../components/Header'
+import Nav from '../components/Nav'
 
 // ROUTES
+import DirectMessage from './main/DirectMessage'
+import NewMessage from './main/NewMessage'
+import Welcome from './main/Welcome'
+import Channel from './main/Channel'
+import Chat from './main/Chat/Chat'
 import Login from './LoginPage'
 
-const MainPage = () => {
+const ClientPage = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'))
   const [user, setUser] = useState(storedUser)
 
@@ -23,11 +27,11 @@ const MainPage = () => {
   return (
     !user ? <Login setUser={setUser}/> :
     <Container>
-      <Header user={user}/>
+      <Nav user={user}/>
       <Main>
-        <Sidebar/>
+        <Sidebar user={user}/>
         <Routes>
-          {/* <Route index element={<Welcome />} */}
+          {/* <Route index element={<NewMessage/>}/> */}
           <Route index element={<Chat user={user}/>} />
         </Routes>
       </Main>
@@ -35,7 +39,7 @@ const MainPage = () => {
   )
 }
 
-export default MainPage
+export default ClientPage
 
 const Container = styled.div`
   width: 100%;
@@ -44,6 +48,8 @@ const Container = styled.div`
   grid-template-rows: 38px auto;
 `
 const Main = styled.div`
+  color: #FFF;
   display: grid;
-  grid-template-columns: 260px auto;
+  background: #222529;
+  grid-template-columns: 240px auto;
 `

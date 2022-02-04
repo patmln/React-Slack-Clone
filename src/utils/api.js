@@ -1,7 +1,7 @@
 const API_URI = process.env.REACT_APP_API_URI
 const headers = { 'Content-Type': 'application/json' }
 
-export const register = async (userData) => {
+export const register = async(userData) => {
   const options = {
     method: 'POST',
     headers: headers,
@@ -11,7 +11,6 @@ export const register = async (userData) => {
   try {
     const res = await fetch(`${API_URI}auth`, options)
     const data = await res.json()
-    console.log(data)
   } catch(err) {
     console.log(err)
   }
@@ -53,6 +52,7 @@ export const login = async (userData) => {
     return null
   }
 }
+
 export const sendMessage = async (authData, message) => {
   const options = {
     method: 'POST',
@@ -84,12 +84,37 @@ export const getMessages = async (authData, receiverId) => {
     return null
   }
 }
-export const createChannel = async () => {
 
-}
-export const getAllUsersChannels = async () => {
+export const createChannel = async(authUser, data) => {
+  const options = {
+    method: 'POST',
+    headers: authUser,
+    body: JSON.stringify(data)
+  }
 
+  try {
+    const res = await fetch(`${API_URI}channels`, options)
+  } catch(err) {
+    console.error(err)
+  }
 }
+
+export const getAllUsersChannels = async(authUser) => {
+  const options = { 
+    method: 'GET',
+    headers: authUser
+  } 
+
+  try {
+    const res = await fetch(`${API_URI}channels`, options)
+    const data = await res.json()
+    return data
+  } catch(err) {
+    console.error(err)
+    return null
+  }
+}
+
 export const getChannelDetails = async () => {
 
 }

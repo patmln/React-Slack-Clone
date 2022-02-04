@@ -1,25 +1,29 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const Container = styled.div`
-  background: #3F0E40;
+  background: #1D2229;
+  color: #b0b2b4;
 `
 
-export const Workspace = styled.div`
-  color: #FFF;
-  height: 64px;
+export const Header = styled.div`
+  height: 49px;
   display: flex;
-  padding-left: 19px;
+  color: whitesmoke;
+  padding-left: 16px;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #532753;
+  margin-bottom: 20px;
+  outline: 1px solid #34383E;
+  p {
+    font-size: 18px;
+    font-weight: 700;
+  }
 `
 
-export const NewMessage = styled.div`
-  width: 36px;
-  height: 36px;
+export const NewMessage = styled(Link)`
+  width: 32px;
+  height: 32px;
   display: flex;
-  fill: #3F0E40;
-  color: #3F0E40;
   cursor: pointer;
   background: #FFF;
   border-radius: 50%;
@@ -27,33 +31,33 @@ export const NewMessage = styled.div`
   align-items: center;
   justify-content: center;
 `
-
-export const MainChannels = styled.div`
-  padding-top: 20px;
-`
-
-export const ChannelItem = styled.div`
-  color: whitesmoke;
-  display: grid;
-  grid-template-columns: 15% auto;
-  height: 28px;
-  align-items: center;
-  padding-left: 19px;
-  cursor: pointer;
-  &:hover { background: #350D36; }
-`
-
-export const ChannelContainer = styled.div`
-  color: whitesmoke;
-  margin-top: 10px;
-`
-export const NewChannels = styled.div`
+const listItemStyle = `
   height: 28px;
   display: flex;
+  font-size: 15px;
+  cursor: pointer;
+  padding-left: 19px;
+  align-items: center;
+  span { margin-left: 8px; } 
+`
+export const ListItem = styled.div`
+  ${listItemStyle}
+  &:hover { background: #313843; }
+`
+export const MoreItem = styled.div`
+  ${listItemStyle}
+  &:hover { color: whitesmoke; }
+`
+
+export const Accordion = styled.div`
+  margin-top: 10px;
+`
+export const ChannelsTab = styled.div`
+  height: 28px;
+  display: flex;
+  cursor: pointer;
   padding-left: 19px;
   padding-right: 12px;
   align-items: center;
   justify-content: space-between;
-
-  .MuiSvgIcon-root { cursor: pointer; }
 `

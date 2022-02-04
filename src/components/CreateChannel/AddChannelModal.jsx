@@ -1,31 +1,37 @@
 import {useState} from 'react'
 import {
   Modal, ModalContent, 
-  ModalHeader, ModalTitle, 
+  Header, ModalTitle, 
   ModalClose, ModalBody,
-  ModalDescription, ModalInfo, 
+  Description, Info, 
   ModalLabel, ModalName, 
-  ModalInputStart, ModalInputName,
-  ModalInput, ModalOptional, ModalP,
-  ModalPrivate, ModalPrivateInfo, 
+  ModalInputStart, NameInput,
+  DescriptionInput, ModalOptional, 
+  ModalP, ModalPrivate, 
+  ModalPrivateInfo, 
   ModalCheckbox, ModalLearn, 
   ModalCreate, ModalFooter 
 } from './style.js'
 
 
 const AddChannelModal = props => {
-  //const createChannelHandler
-    //fetch api
-  
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [_private, isPrivate] = useState(false)
+
+  const handleCreate = () => {
+    
+  }
+
   if (!props.show) return null
 
   return (
     <Modal onClick={props.onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <ModalTitle>Create a Channel</ModalTitle>
+        <Header>
+          <h2>Create a Channel</h2>
           <ModalClose onClick={props.onClose}>&times;</ModalClose>
-        </ModalHeader>
+        </Header>
         <ModalBody>
           <Info>
             Channels are where your team communicates. They're best when
@@ -34,15 +40,18 @@ const AddChannelModal = props => {
           <ModalLabel>Name</ModalLabel>
           <ModalName>
             <ModalInputStart>#</ModalInputStart>
-            <ModalInputName
-                placeholder="e.g. plan-budget">    
-            </ModalInputName>
+            <NameInput 
+              placeholder='e.g. plan-budget'
+              onChange={e => setName(e.target.value)}
+             />    
           </ModalName>
           <Description>
             <ModalLabel>Description</ModalLabel>
             <ModalOptional>(optional)</ModalOptional>
           </Description>
-          <ModalInput></ModalInput>
+          <DescriptionInput
+            onChange={e => setDescription(e.target.value)}
+          />
           <ModalP>What's this channel about?</ModalP>
           <ModalLabel>Make private</ModalLabel>
           <ModalPrivate>
@@ -55,7 +64,7 @@ const AddChannelModal = props => {
         </ModalBody>
         <ModalFooter>
           <ModalLearn>Learn more</ModalLearn>
-          <ModalCreate>Create</ModalCreate>
+          <ModalCreate onClick={handleCreate}>Create</ModalCreate>
         </ModalFooter>
       </ModalContent>
     </Modal>
