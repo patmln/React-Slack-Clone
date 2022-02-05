@@ -1,4 +1,5 @@
 import {register} from '../../utils/api'
+import {useState} from 'react'
 import {
   RegisterMain, RegisterBoard,
   RegisterInput, SignUpButton,

@@ -20,7 +20,6 @@ export const login = async (userData) => {
   const options = {
     method: 'POST',
     headers: headers,
-    redirect: 'follow',
     body: JSON.stringify(userData)
   }
 
@@ -53,10 +52,10 @@ export const login = async (userData) => {
   }
 }
 
-export const sendMessage = async (authData, message) => {
+export const sendMessage = async (auth, message) => {
   const options = {
     method: 'POST',
-    headers: authData,
+    headers: auth,
     body: JSON.stringify(message),
   }
 
@@ -69,10 +68,10 @@ export const sendMessage = async (authData, message) => {
   }
 }
 
-export const getMessages = async (authData, receiverId) => {
+export const getMessages = async (auth, receiverId) => {
   const options = {
     method: 'GET',
-    headers: authData,
+    headers: auth,
   }
 
   try {
@@ -85,10 +84,10 @@ export const getMessages = async (authData, receiverId) => {
   }
 }
 
-export const createChannel = async(authUser, data) => {
+export const createChannel = async(auth, data) => {
   const options = {
     method: 'POST',
-    headers: authUser,
+    headers: auth,
     body: JSON.stringify(data)
   }
 
@@ -99,10 +98,10 @@ export const createChannel = async(authUser, data) => {
   }
 }
 
-export const getAllUsersChannels = async(authUser) => {
+export const getAllUsersChannels = async(auth) => {
   const options = { 
     method: 'GET',
-    headers: authUser
+    headers: auth
   } 
 
   try {
@@ -115,15 +114,25 @@ export const getAllUsersChannels = async(authUser) => {
   }
 }
 
-export const getChannelDetails = async () => {
+export const getChannelDetails = async() => {
 
 }
-export const addMemberToChannel = async () => {
+export const addMemberToChannel = async() => {
 
 }
-export const allUsers = async () => {
 
+export const getAllUsers = async(auth) => {
+  try {
+    const res = await fetch(
+      `${API_URI}users`, { headers: auth })
+    const data = await res.json()
+    return data
+  } catch(err) {
+    console.log(err)
+    return null
+  }
 }
+
 export const allUsersOwnedChannel = async () => {
 
 }
