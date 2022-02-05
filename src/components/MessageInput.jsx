@@ -1,17 +1,12 @@
-import SendIcon from '@material-ui/icons/Send'
-import {sendMessage} from '../../utils/api'
+import {HiPaperAirplane} from 'react-icons/hi'
+import {sendMessage} from '../utils/api'
 import styled from 'styled-components'
 import {useState} from 'react'
 
 const ChatInput = ({authData}) => {
+  const [message, setMessage] = useState('')
+
   const handleSend = e => {
-    e.preventDefault()
-    const input = e.target[0]
-    const messageObj = {
-      'receiver_id': 3,
-      'receiver_class': 'User',
-      'body': input.value
-    }
     if (!input.value) return
     sendMessage(authData, messageObj)
   }
@@ -23,7 +18,9 @@ const ChatInput = ({authData}) => {
           <input 
             type='text' 
             placeholder='Message here...'/>
-          <button><SendIcon/></button>
+          <button>
+            <HiPaperAirplane size={18} color='white'/>
+          </button>
         </form>
       </InputField> 
     </Container>
@@ -50,7 +47,10 @@ const InputField = styled.div`
       flex: 1;
       border: none;
       font-size: 13px;
+      color: whitesmoke;
+      background: transparent;
       &:focus { outline: none; }
+      &::placeholder { color: #FFF; }
     }
 
     button {
@@ -59,16 +59,10 @@ const InputField = styled.div`
       display: flex;
       cursor: pointer;
       margin-right: 5px;
-      border-radius: 2px;
-      background: #007A5A;
       align-items: center;
       justify-content: center;
-
-      .MuiSvgIcon-root { 
-        width: 18px;
-        color: #D9D9D9;
-      }
-      &:hover { background: #148567; }
+      background: transparent;
+      transform: rotate(90deg);
     }
   }
 `

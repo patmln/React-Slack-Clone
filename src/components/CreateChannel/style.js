@@ -15,18 +15,19 @@ export const Modal = styled.div`
 export const ModalContent = styled.div`
   width: 500px;
   height: 64vh;
-  background-color: #fff;
-  border-radius: 8px;
   padding: 30px;
+  background: #fff;
   padding-top: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
+  border-radius: 8px;
   padding-right: 35px;
 `
 
-export const ModalHeader = styled.div`
+export const Header = styled.div`
+  color: #000;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `
 
 export const ModalFooter = styled.div`
@@ -35,10 +36,6 @@ export const ModalFooter = styled.div`
   align-content: end;
   margin-top: 40px;
 `
-
-export const ModalTitle = styled.h2`
-  color: black;
-` 
 
 export const ModalClose = styled.button`
   cursor: pointer;
@@ -90,7 +87,7 @@ export const ModalInputStart = styled.button`
   border-right-style: none;
 ` 
 
-export const ModalInputName = styled.input`
+export const NameInput = styled.input`
   width: 100%;
   padding: 10px 10px;
   border: 1px solid gray;
@@ -100,7 +97,7 @@ export const ModalInputName = styled.input`
   &:focus { outline: none; }
 `
 
-export const ModalInput = styled.input`
+export const DescriptionInput = styled.input`
   width: 100%;
   padding: 10px 10px;
   border: 1px solid gray;
@@ -121,7 +118,6 @@ export const ModalPrivateInfo = styled.p`
 ` 
 
 export const ModalCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  
 ` 
 
 export const ModalLearn = styled.button`
