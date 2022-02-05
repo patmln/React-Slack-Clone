@@ -3,7 +3,7 @@ import {
   Modal, ModalContent, 
   ModalHeader, ModalTitle, 
   ModalClose, ModalBody,
-  ModalDescription, ModalInfo, 
+  Description,Info, 
   ModalLabel, ModalName, 
   ModalInputStart, ModalInputName,
   ModalInput, ModalOptional, ModalP,
