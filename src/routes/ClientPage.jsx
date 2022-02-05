@@ -31,8 +31,8 @@ const ClientPage = () => {
       <Main>
         <Sidebar user={user}/>
         <Routes>
-          {/* <Route index element={<NewMessage/>}/> */}
-          <Route index element={<Chat user={user}/>} />
+          <Route index element={<NewMessage user={user}/>}/>
+          {/* <Route index element={<Chat user={user}/>} /> */}
         </Routes>
       </Main>
     </Container>

@@ -1,6 +1,34 @@
+import MessageInput from '../../components/MessageInput'
+import {getAllUsers} from '../../utils/api'
+import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
-const NewMessage = () => {
+const NewMessage = ({user}) => {
+  const auth = user.authData
+  const [search, setSearch] = useState('')
+  const [userList, setUserList] = useState([])
+  const [receiverId, setReceiverId] = useState('')
+  const [suggestions, setSuggestions] = useState([])
+
+  useEffect(() => {
+    (async()=> {
+      const {data} = await getAllUsers(auth)
+      setUserList(data)
+    })()
+  }, [])
+
+  const handleOnChange = input => {
+    let matches = []
+    if (input.length > 0) {
+      matches = userList.filter(usr => {
+        const regex = new RegExp(`${input}`,'gi')
+        return usr.email.match(regex)
+      })
+    }
+    setSuggestions(matches)
+    setSearch(input)
+  }
+
   return (
     <Container>
       <Header>
@@ -8,8 +36,17 @@ const NewMessage = () => {
       </Header>
       <Search>
         <h4>To:</h4>
-        <input placeholder='#a-channel, @somebody, or somebody@example.com'/>
+        <input 
+          onChange={e => handleOnChange(e.target.value)}
+          placeholder='#a-channel, @somebody, or somebody@example.com'
+        />
       </Search>
+      {suggestions && 
+        suggestions.map(({email}, index) => 
+          <div key={index}>{email}</div>
+        )
+      }
+    <MessageInput auth={auth} />
     </Container>
   )
 }
@@ -17,9 +54,9 @@ const NewMessage = () => {
 export default NewMessage
 
 const Container = styled.div`
-  display: grid;
+  display: flex;
   color: #d1d2d3;
-  grid-template-rows: 49px 49px auto min-content;
+  flex-direction: column;
 `
 
 const Header = styled.div`
