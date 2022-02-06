@@ -1,6 +1,7 @@
 import {login} from '../utils/api'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
+import Snackbar from '../components/Snackbar/Snackbar'
 
 // LOGIN COMPONENT
 export default({setUser}) => {
@@ -21,6 +22,16 @@ export default({setUser}) => {
     setUser(data)
   }
 
+  //Snackbar
+  const SnackbarType = {
+    success: "success",
+    fail: "fail",
+  };
+
+  const snackbarRef = useRef(null);
+
+
+
   return (
     <Container>
       <Content>
@@ -36,8 +47,18 @@ export default({setUser}) => {
             placeholder='Password'
             onChange={e => setPassword(e.target.value)}
           />
-          <button type='submit'>Sign In</button>
+          <button 
+          type='submit'
+          onClick={() => {
+            snackbarRef.current.show();
+          }}
+          >Sign In</button>
         </form>
+        <Snackbar
+        ref={snackbarRef}
+        message="Task Completed Successfully!"
+        type={SnackbarType.success}
+      />
       </Content>
     </Container>
   )
