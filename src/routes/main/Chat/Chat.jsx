@@ -32,7 +32,7 @@ const Chat = ({user}) => {
         </ChannelName>
       </Header>
       <Thread messages={messages}/>
-      <MessageInput authData={authData}/>
+      <MessageInput auth={authData}/>
     </Container>
   )
 }

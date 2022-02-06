@@ -3,31 +3,31 @@ import {sendMessage} from '../utils/api'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const ChatInput = ({authData}) => {
+const MessageInput = ({auth}) => {
+  const [input, setInput] = useState('')
   const [message, setMessage] = useState('')
 
-  const handleSend = e => {
-    if (!input.value) return
-    sendMessage(authData, messageObj)
+  const handleSend = () => {
+    console.log(input)
+    // sendMessage(auth, messageObj)
   }
 
   return (
     <Container>
       <InputField>
-        <form onSubmit={handleSend}>
-          <input 
-            type='text' 
-            placeholder='Message here...'/>
-          <button>
-            <HiPaperAirplane size={18} color='white'/>
-          </button>
-        </form>
+        <input 
+          type='text' 
+          placeholder='Message here...'
+          onChange={e => setInput(e.target.value)}/>
+        <button onClick={handleSend}>
+          <HiPaperAirplane size={18} color='white'/>
+        </button>
       </InputField> 
     </Container>
   )
 }
 
-export default ChatInput
+export default MessageInput
 
 const Container = styled.div`
   padding: 0 20px;
@@ -35,34 +35,32 @@ const Container = styled.div`
 `
 
 const InputField = styled.div`
+  height: 42px;
+  display: flex;
   border-radius: 4px;
+  padding-left: 10px;
+  align-items: center;
   border: 1px solid #8D8D8E;
-  form {
-    height: 42px;
+
+  input {
+    flex: 1;
+    border: none;
+    font-size: 13px;
+    color: whitesmoke;
+    background: transparent;
+    &:focus { outline: none; }
+    &::placeholder { color: #FFF; }
+  }
+
+  button {
+    width: 32px;
+    border: none;
     display: flex;
-    padding-left: 10px;
+    cursor: pointer;
+    margin-right: 5px;
     align-items: center;
-
-    input {
-      flex: 1;
-      border: none;
-      font-size: 13px;
-      color: whitesmoke;
-      background: transparent;
-      &:focus { outline: none; }
-      &::placeholder { color: #FFF; }
-    }
-
-    button {
-      width: 32px;
-      border: none;
-      display: flex;
-      cursor: pointer;
-      margin-right: 5px;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      transform: rotate(90deg);
-    }
+    justify-content: center;
+    background: transparent;
+    transform: rotate(90deg);
   }
 `
