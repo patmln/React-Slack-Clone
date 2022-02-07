@@ -1,14 +1,16 @@
 import {Routes, Route} from 'react-router-dom'
 import styled from 'styled-components'
 
-import Sidebar from '../components/Sidebar/Sidebar'
-import Nav from '../components/Nav'
+import Sidebar from '../components/stateful/sidebar/Sidebar'
+import Nav from '../components/stateless/Nav'
 
 import DirectMessage from './client/DirectMessage'
 import NewMessage from './client/NewMessage'
 import Welcome from './client/Welcome'
 import Channel from './client/Channel'
-import Chat from './client/Chat/Chat'
+import Chat from './client/Chat'
+
+import SampleThread from '../components/SampleThread'
 
 export default({user}) => (
   <ClientPage>
@@ -16,6 +18,7 @@ export default({user}) => (
     <Main>
       <Sidebar user={user}/>
       <Routes>
+        {/* <Route index element={<SampleThread/>} /> */}
         <Route index element={<NewMessage user={user}/>}/>
         {/* <Route index element={<Chat user={user}/>} /> */}
       </Routes>

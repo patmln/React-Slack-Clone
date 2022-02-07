@@ -1,5 +1,5 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
-import styled from "styled-components";
+import React, { useState, forwardRef, useImperativeHandle } from 'react'
+import styled from 'styled-components'
 import './style.css'
 
 const Snackbar = forwardRef((props, ref) => {
@@ -17,7 +17,7 @@ const Snackbar = forwardRef((props, ref) => {
     <SnackbarContainer
       id={showSnackbar ? "show" : "hide" }
       style={{
-        backgroundColor: props.type === "fail" ? "#2EB67D" : "#D10041",
+        background: props.type === "fail" ? "#2EB67D" : "#D10041",
         color: props.type === "fail" ? "black" : "white",
       }}
     >
@@ -34,7 +34,7 @@ export default Snackbar;
 const SnackbarContainer = styled.div`
   position: fixed;
   left: 50%;
-  top: 5%;
+  bottom: 5%;
   transform: translate(-50%, -50%);
   width: 350px;
   height: 50px;
@@ -69,7 +69,6 @@ const SnackbarContainer = styled.div`
       opacity: 0;
     }
   }
-
 `
 
 const Symbol = styled.div`

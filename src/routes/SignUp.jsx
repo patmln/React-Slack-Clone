@@ -1,21 +1,21 @@
-import {inputData} from '../data/signUpInputData'
+import Form from '../components/stateless/Form'
+import {inputData} from '../data/authInputData'
 import {register} from '../utils/api/user'
 import styled from 'styled-components'
-import Form from '../components/Form'
 import {useState} from 'react'
 
 export default() => {
   const logoUrl = 'http://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg'
 
   const handleSubmit = e => {
-    if(!email || !password || !confirmPassword) return
-
-    const newUser = {
-      'email': email,
-      'password': password,
-      'password_confirmation': confirmPassword
-    }
-    register(newUser) 
+    // if(!email || !password || !confirmPassword) return
+    //
+    // const newUser = {
+    //   'email': email,
+    //   'password': password,
+    //   'password_confirmation': confirmPassword
+    // }
+    // register(newUser) 
   }
 
   return(

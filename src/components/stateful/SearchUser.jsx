@@ -1,8 +1,8 @@
-import {getAllUsers} from '../utils/api/user'
+import {getAllUsers} from '../../utils/api/user'
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
-const SearchUser = ({auth}) => {
+export default({auth}) => {
   const [search, setSearch] = useState('')
   const [userList, setUserList] = useState([])
   const [suggestions, setSuggestions] = useState([])
@@ -46,8 +46,6 @@ const SearchUser = ({auth}) => {
     </SearchResult>
   </>)  
 }
-
-export default SearchUser
 
 const Search = styled.div`
   width: 100%;

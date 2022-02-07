@@ -1,9 +1,9 @@
-import {sendMessage} from '../utils/api/messages'
+import {sendMessage} from '../../utils/api/messages'
 import {HiPaperAirplane} from 'react-icons/hi'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const ChatInput = ({auth}) => {
+export default({auth}) => {
   const [input, setInput] = useState('')
   const [message, setMessage] = useState('')
 
@@ -13,8 +13,8 @@ const ChatInput = ({auth}) => {
   }
 
   return (
-    <Container>
-      <InputField>
+    <ChatInput>
+      <Container>
         <input 
           type='text' 
           placeholder='Message here...'
@@ -22,21 +22,19 @@ const ChatInput = ({auth}) => {
         <button onClick={handleSend}>
           <HiPaperAirplane size={18} color='white'/>
         </button>
-      </InputField> 
-    </Container>
+      </Container> 
+    </ChatInput>
   )
 }
 
-export default ChatInput
-
-const Container = styled.div`
+const ChatInput= styled.div`
   width: 100%;
   padding: 0 20px;
   margin-top: auto;
   padding-bottom: 24px;
 `
 
-const InputField = styled.div`
+const Container = styled.div`
   height: 42px;
   display: flex;
   border-radius: 4px;

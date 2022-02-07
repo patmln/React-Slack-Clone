@@ -1,9 +1,9 @@
-import AddChannelModal from '../CreateChannel/AddChannelModal'
 import {RiArrowRightSFill} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
 import styled from 'styled-components'
 import {HiPlus} from 'react-icons/hi'
 import {ListItem} from './TabItems'
+import Modal from '../../Modal'
 import {useState} from 'react'
 
 export default({channels}) => {
@@ -12,12 +12,12 @@ export default({channels}) => {
     <Accordion>
       <Tab>
         <RiArrowRightSFill size={20}/>
-        <div>Channels</div>
+        <p>Channels</p>
         <FiMoreVertical size={18}/>
         <HiPlus size={20} onClick={() => setShow(true)}/>
-        <AddChannelModal onClose={() => setShow(false)} show={show}/>
+        <Modal onClose={() => setShow(false)} show={show}/>
       </Tab>
-      <div className='ChannelList'>{
+      <div>{
         channels.map(({name}, index) => (
           <ListItem key={index}>
             #{name}

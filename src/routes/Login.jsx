@@ -1,61 +1,57 @@
+import Snackbar from '../components/stateful/snackbar/Snackbar'
+import {useState, useEffect, useRef} from 'react'
+import Form from '../components/stateless/Form'
+import {inputData} from '../data/authInputData'
 import {login} from '../utils/api/user'
 import styled from 'styled-components'
-import {useState, useEffect, useRef} from 'react'
-import Snackbar from '../components/Snackbar/Snackbar'
+import {Link} from 'react-router-dom'
 
 export default({setUser}) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const SnackbarType = {
+    success: 'success',
+    fail: 'fail',
+  }
+
+  const snackbarRef = useRef(null)
 
   const handleSubmit = async(e) => {
     e.preventDefault()
+    const email = e.target.email.value
+    const password = e.target.password.value
+
     if (!email || !password) return
 
-    const user = {
+    const userData = {
       'email': email, 
       'password': password
     }
 
-    const data = await login(user)
-    localStorage.setItem('user', JSON.stringify(data))
-    setUser(data)
+    const user = await login(userData)
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user))
+      setUser(user)
+    }
+    else snackbarRef.current.show()
   }
 
-  //Snackbar
-  const SnackbarType = {
-    success: "success",
-    fail: "fail",
-  };
-
-  const snackbarRef = useRef(null);
+  inputData.length = 2 // Exclude confirm password
 
   return (
     <LoginPage>
       <Content>
-        <img src='./slack-logo.svg' style={{height: '100px'}}/>
-        <form onSubmit={handleSubmit}>
-          <input 
-            type='text' 
-            placeholder='Email'
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input 
-            type='password' 
-            placeholder='Password'
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button 
-          type='submit'
-          onClick={() => {
-            snackbarRef.current.show();
-          }}
-          >Sign In</button>
-        </form>
+        {/* <SiSlack size={100} color={'whitesmoke'}/> */}
+        <img src='./slack-logo.svg'/>
+        <h3>Sign in to Slack</h3>
+        <p>We suggest using the <strong>email address you use at work.</strong></p> 
+        <Form
+          btnLabel='Sign In'
+          inputData={inputData}
+          handleSubmit={handleSubmit}/>
+        <Link to='../signup'>Create an account</Link>
         <Snackbar
-        ref={snackbarRef}
-        message="Task Completed Successfully!"
-        type={SnackbarType.success}
-      />
+          ref={snackbarRef}
+          message='Successful!'
+          type={SnackbarType.success}/>
       </Content>
     </LoginPage>
   )
@@ -65,19 +61,35 @@ const LoginPage = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  color: whitesmoke;
   align-items: center;
-  background: #f8f8f8;
+  background: #19191b;
   justify-content: center;
 `
 
 const Content = styled.div`
-  padding: 100px;  
   display: flex;
+  padding: 70px;
   border-radius: 5px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.12), 
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  img { 
+    height: 110px; 
+    margin-bottom: 40px;
+  }
+  h3 { 
+    font-size: 40px; 
+    margin-bottom: 15px;
+  }
+  p { 
+    font-size: 16px; 
+    margin-bottom: 20px;
+  }
+  a {
+    margin-top: 25px;
+    color: whitesmoke;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
 `

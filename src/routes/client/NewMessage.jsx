@@ -1,8 +1,7 @@
+import SearchUser from '../../components/stateful/SearchUser'
+import ChatInput from '../../components/stateful/ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
-
-import SearchUser from '../../components/SearchUser'
-import ChatInput from '../../components/ChatInput'
 
 const NewMessage = ({user}) => {
   const [receiverId, setReceiverId] = useState('')

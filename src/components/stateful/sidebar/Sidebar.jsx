@@ -1,6 +1,8 @@
-import {getAllUsersChannels} from '../../utils/api/channels'
 import {useState,useEffect} from 'react'
 import styled from 'styled-components'
+import {
+  getAllUsersChannels
+} from '../../../utils/api/channels'
 import Accordion from './Accordion'
 import TabItems from './TabItems'
 import Header from './Header'

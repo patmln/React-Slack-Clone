@@ -1,61 +1,64 @@
 import styled from 'styled-components'
+import {SiSlack} from 'react-icons/si'
 
-const ErrorPage = () => {
-  return ( 
-    <Container>
-      <MessageBox>
-        <h1>404</h1>
-        <p>Page not found</p>
-        <ButtonGroup>
-          <Button onclick="history.back(-1)">Go Back</Button>
-          <Button>Go to Home Page</Button>
-        </ButtonGroup>
-      </MessageBox>
-    </Container>
-  )
-}
-
-export default ErrorPage
+export default() => ( 
+  <Container>
+    <SiSlack size={100} color={'whitesmoke'}/>
+    <img src='./404.png' style={{height: '150px'}}/>
+    <h4>Opps! The page you were looking for was not found</h4>
+    <ButtonGroup>
+      <Button onclick='history.back(-1)'>Go Back</Button>
+      <Button>Home Page</Button>
+    </ButtonGroup>
+  </Container>
+)
 
 const Container = styled.div`
+  width: 100vw;
   height: 100vh;
-  background: #2F3242;
-`
-
-const MessageBox = styled.div`
-  height: 200px;
-  width: 380px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: 50px;
-  color: #FFF;
-  font-weight: 300;
+  display: flex;
+  background: #19191b;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   h4 {
-    font-size: 60px;
+    color: #ddd;
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: 300;
     line-height: 46px;
-    margin-bottom: 40px;
   }
+  svg { margin-bottom: 50px; }
 `
 
 const ButtonGroup = styled.div`
-  margin-top: 40px;
+  width: 50%;
+  display: flex;
+  margin-top: 60px;
+  justify-content: space-evenly;
 `
 
 const Button = styled.a`
-  background: #68c950;
+  color: #FFF;
+  font-size: 14px;
+  cursor: pointer;
   padding: 8px 25px;
   border-radius: 4px;
-  color: #FFF;
   font-weight: bold;
-  font-size: 14px;
-  transition: all 0.3s linear;
-  cursor: pointer;
-  text-decoration: none;
   margin-right: 10px;
-  &:hover {
-    background: #5A5C6C;
-    color: #fff;
+  background: #e01e5a;
+
+  text-decoration: none;
+  transition: all 0.3s linear;
+  :hover {
+    background: transparent;
+    outline: 1px solid #E01E5A;
+  }
+  :last-child{ 
+    background: #2eb67d;   
+    :hover { 
+      background: transparent;
+      outline: 1px solid #2EB67D;
+    }
   }
 `
