@@ -46,7 +46,7 @@ const NewMessage = ({user}) => {
           <div key={index}>{email}</div>
         )
       }
-    <MessageInput auth={auth} />
+      <MessageInput auth={auth} />
     </Container>
   )
 }

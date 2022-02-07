@@ -31,7 +31,7 @@ const ClientPage = () => {
       <Main>
         <Sidebar user={user}/>
         <Routes>
-          <Route index element={<NewMessage user={user}/>}/>
+          <Route index element={<Channel user={user}/>}/>
           {/* <Route index element={<Chat user={user}/>} /> */}
         </Routes>
       </Main>
@@ -46,6 +46,7 @@ const Container = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: 38px auto;
+  overflow: hidden;
 `
 const Main = styled.div`
   color: #FFF;
