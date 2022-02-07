@@ -9,12 +9,13 @@ export default() => {
 
   const handleSubmit = e => {
     // if(!email || !password || !confirmPassword) return
-    //
+    
     // const newUser = {
     //   'email': email,
     //   'password': password,
     //   'password_confirmation': confirmPassword
     // }
+    
     // register(newUser) 
   }
 

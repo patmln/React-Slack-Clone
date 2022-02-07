@@ -21,14 +21,6 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  h4 {
-    color: #ddd;
-    font-size: 25px;
-    margin-top: 20px;
-    font-weight: 300;
-    line-height: 46px;
-  }
-  svg { margin-bottom: 50px; }
 `
 
 const ButtonGroup = styled.div`
@@ -39,6 +31,9 @@ const ButtonGroup = styled.div`
 `
 
 const Button = styled.a`
+  background: #1D2229;
+  padding: 8px 25px;
+  border-radius: 4px;
   color: #FFF;
   font-size: 14px;
   cursor: pointer;

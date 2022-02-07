@@ -10,16 +10,14 @@ import Welcome from './client/Welcome'
 import Channel from './client/Channel'
 import Chat from './client/Chat'
 
-import SampleThread from '../components/SampleThread'
-
 export default({user}) => (
   <ClientPage>
     <Nav user={user}/>
     <Main>
       <Sidebar user={user}/>
       <Routes>
-        {/* <Route index element={<SampleThread/>} /> */}
-        <Route index element={<NewMessage user={user}/>}/>
+        <Route index element={<Channel user={user}/>} />
+        {/* <Route index element={<NewMessage user={user}/>}/> */}
         {/* <Route index element={<Chat user={user}/>} /> */}
       </Routes>
     </Main>
@@ -31,6 +29,7 @@ const ClientPage = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: 38px auto;
+  overflow: hidden;
 `
 const Main = styled.div`
   color: #FFF;

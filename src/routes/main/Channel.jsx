@@ -1,10 +1,10 @@
-import ChatInput from '../../components/stateful/ChatInput'
-import SampleThread from '../../components/SampleThread'
+import ChatInput from '../../components/ChatInput'
 //import {getAllUsers} from '../../utils/api'
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
+import SampleThread from '../../data/sampleChannelThread'
 
-export default({user}) => {
+const Channel = ({user}) => {
   const auth = user.authData
 
   return (
@@ -22,7 +22,7 @@ export default({user}) => {
         <button>+ Add a bookmark</button>
       </Search>
       <Thread>
-        <SampleThread/>
+        <SampleThread />
       </Thread>
       <MessageInputBox>
         <ChatInput auth={auth} />
@@ -101,3 +101,5 @@ const Thread = styled.div`
   height: 70%;
   overflow: auto;
 `
+
+export default Channel

@@ -1,6 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react'
 import styled from 'styled-components'
 import './style.css'
+import {
+  useState, forwardRef, 
+  useImperativeHandle 
+} from 'react'
 
 const Snackbar = forwardRef((props, ref) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -14,22 +17,26 @@ const Snackbar = forwardRef((props, ref) => {
     },
   }));
   return (
-    <SnackbarContainer
-      id={showSnackbar ? "show" : "hide" }
+    <div
+      className="snackbar"
+      id={showSnackbar ? "show" : "hide"}
       style={{
         background: props.type === "fail" ? "#2EB67D" : "#D10041",
         color: props.type === "fail" ? "black" : "white",
+        backgroundColor: props.type === "success" ? "#00F593" : "#FF0033",
+        color: props.type === "success" ? "black" : "white",
       }}
     >
-      <Symbol>
-        {props.type === "fail" ? <h4>&#x2713;</h4> : <h4>&#x2613;</h4>}
-      </Symbol>
-      <Message>{props.message}</Message>
-    </SnackbarContainer>
+      <div className="symbol">
+        {props.type === "success" ? <h1>&#x2713;</h1> : <h1>&#x2613;</h1>}
+      </div>
+      <div className="message">{props.message}</div>
+    </div>
   );
 });
 
 export default Snackbar;
+
 
 const SnackbarContainer = styled.div`
   position: fixed;

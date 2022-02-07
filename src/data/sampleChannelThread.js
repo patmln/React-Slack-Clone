@@ -1,26 +1,30 @@
-import {channelThreadData} from '../data/channelThreadData'
 import styled from 'styled-components'
-import React from 'react'
+import { channelThreadData } from './sampleData'
 
-export default() => (
-  <Message>
-    {channelThreadData.map((item, index) => (
-      <React.Fragment key={index}>
-        <UserAvatar>
-          {item.icon}
-        </UserAvatar>
-        <MessageContent>
-          <Name>
-            {item.name}
-            <Date>{item.date}</Date>
-          </Name>
-          <span>{item.message}</span>
-        </MessageContent>
-      </React.Fragment>
-    ))}
-  </Message>
-)
+const SampleThread = () => {
+    return(
+      <Message>
+        {
+          channelThreadData.map(item => (
+            <><UserAvatar>
+              {item.icon}
+            </UserAvatar>
+            <MessageContent>
+              <Name>
+              {item.name}
+                <Date>{item.date}</Date>
+              </Name>
+              <span>{item.message}</span>
+            </MessageContent></>
+          ))
+        }
+      </Message>
+    )
+}
 
+export default SampleThread
+
+// STYLES
 const Message = styled.div`
   display: grid;
   padding: 8px 20px;
@@ -40,6 +44,7 @@ const UserAvatar = styled.div`
 const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
+  
 `
 
 const Name = styled.span`
