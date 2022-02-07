@@ -1,47 +1,29 @@
-// MODULES
 import {Routes, Route} from 'react-router-dom'
 import styled from 'styled-components'
-import {useState} from 'react'
 
-// COMPONENTS
 import Sidebar from '../components/Sidebar/Sidebar'
 import Nav from '../components/Nav'
 
-// ROUTES
-import DirectMessage from './main/DirectMessage'
-import NewMessage from './main/NewMessage'
-import Welcome from './main/Welcome'
-import Channel from './main/Channel'
-import Chat from './main/Chat/Chat'
-import Login from './LoginPage'
+import DirectMessage from './client/DirectMessage'
+import NewMessage from './client/NewMessage'
+import Welcome from './client/Welcome'
+import Channel from './client/Channel'
+import Chat from './client/Chat/Chat'
 
-const ClientPage = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user'))
-  const [user, setUser] = useState(storedUser)
+export default({user}) => (
+  <ClientPage>
+    <Nav user={user}/>
+    <Main>
+      <Sidebar user={user}/>
+      <Routes>
+        <Route index element={<NewMessage user={user}/>}/>
+        {/* <Route index element={<Chat user={user}/>} /> */}
+      </Routes>
+    </Main>
+  </ClientPage>
+)
 
-  const signOut = () => {
-    localStorage.removeItem('user')
-    setUser(null)
-  }
-
-  return (
-    !user ? <Login setUser={setUser}/> :
-    <Container>
-      <Nav user={user}/>
-      <Main>
-        <Sidebar user={user}/>
-        <Routes>
-          <Route index element={<NewMessage user={user}/>}/>
-          {/* <Route index element={<Chat user={user}/>} /> */}
-        </Routes>
-      </Main>
-    </Container>
-  )
-}
-
-export default ClientPage
-
-const Container = styled.div`
+const ClientPage = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
