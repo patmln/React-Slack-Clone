@@ -8,14 +8,14 @@ export default() => {
   const logoUrl = 'http://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg'
 
   const handleSubmit = e => {
-    if(!email || !password || !confirmPassword) return
+    // if(!email || !password || !confirmPassword) return
 
-    const newUser = {
-      'email': email,
-      'password': password,
-      'password_confirmation': confirmPassword
-    }
-    register(newUser) 
+    // const newUser = {
+    //   'email': email,
+    //   'password': password,
+    //   'password_confirmation': confirmPassword
+    // }
+    // register(newUser) 
   }
 
   return(
