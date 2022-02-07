@@ -6,12 +6,14 @@ const ErrorPage = () => {
   return ( 
     <Container>
         <Logo src={imageName} />
-        <p>Page not found</p>
+        <MessageBox>
+        <h2>Opps! The page you were looking for was not found</h2>
         <ButtonGroup>
           <Button onclick="history.back(-1)">Go Back</Button>
           <Button>Go to Home Page</Button>
         </ButtonGroup>
 
+        </MessageBox>
     </Container>
   )
 }
@@ -26,6 +28,15 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: #fff;
+`
+
+const MessageBox = styled.div`
+  margin-top: 50px;
+  padding-left: 10%;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
   color: #ddd;
   font-weight: 300;
   h4 {
@@ -35,24 +46,13 @@ const Container = styled.div`
   }
 `
 
-// const MessageBox = styled.div`
-//   height: 200px;
-//   width: 400px;
-//   color: #ddd;
-//   font-weight: 300;
-//   h4 {
-//     font-size: 60px;
-//     line-height: 46px;
-//     margin-bottom: 40px;
-//   }
-// `
-
 const ButtonGroup = styled.div`
-  margin-top: 40px;
+  margin-top: 60px;
+  padding-left: 14%
 `
 
 const Button = styled.a`
-  background: #68c950;
+  background: #1D2229;
   padding: 8px 25px;
   border-radius: 4px;
   color: #FFF;
