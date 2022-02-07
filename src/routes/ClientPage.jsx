@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import Sidebar from '../components/stateful/sidebar/Sidebar'
 import Nav from '../components/stateless/Nav'
 
+import GeneralChannel from './client/GeneralChannel'
 import DirectMessage from './client/DirectMessage'
 import NewMessage from './client/NewMessage'
-import Welcome from './client/Welcome'
 import Channel from './client/Channel'
 import Chat from './client/Chat'
 

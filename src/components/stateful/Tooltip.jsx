@@ -55,11 +55,7 @@ export const Target = styled.button`
   color: inherit;
   cursor: inherit;
   display: flex;
-  ${({ showOnFocus }) =>
-    !showOnFocus &&
-    css`
-      outline: none;
-    `};
+  ${({ showOnFocus }) => !showOnFocus && css` outline: none; `};
 `
 
 const CenterContainer = styled.div`
