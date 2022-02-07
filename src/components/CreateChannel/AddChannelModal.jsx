@@ -1,64 +1,53 @@
 import {useState} from 'react'
+import {CgClose} from 'react-icons/cg'
 import {
-  Modal, ModalContent, 
-  ModalHeader, ModalTitle, 
-  ModalClose, ModalBody,
-  ModalDescription, ModalInfo, 
-  ModalLabel, ModalName, 
-  ModalInputStart, ModalInputName,
-  ModalInput, ModalOptional, ModalP,
-  ModalPrivate, ModalPrivateInfo, 
-  ModalCheckbox, ModalLearn, 
-  ModalCreate, ModalFooter 
+  Overlay, Content, 
+  Header, Body, 
+  ModalLabel, 
+  ModalName, NameInput, 
 } from './style.js'
 
 
-const AddChannelModal = props => {
-  //const createChannelHandler
-    //fetch api
-  
-  if (!props.show) return null
+const AddChannelModal = ({show, onClose})=> {
+  const [name, setName] = useState('')
+
+  const handleCreate = () => { 
+    console.log(name)
+    if (!name || name.length < 3 || name.length > 15) {
+      alert('Name should be within 3-15 characters long')  
+    } else {
+
+    }
+  }
+
+  if (!show) return null
 
   return (
-    <Modal onClick={props.onClose}>
-      <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <ModalTitle>Create a Channel</ModalTitle>
-          <ModalClose onClick={props.onClose}>&times;</ModalClose>
-        </ModalHeader>
-        <ModalBody>
-          <Info>
+    <Overlay onClick={onClose}>
+      <Content onClick={e => e.stopPropagation()}>
+        <Header>
+          <h2>Create a Channel</h2>
+          <CgClose 
+            size={20}
+            onClick={onClose}/>
+        </Header>
+        <Body>
+          <p>
             Channels are where your team communicates. They're best when
             organized around a topic - #marketing, for example.
-          </Info>
+          </p>
           <ModalLabel>Name</ModalLabel>
           <ModalName>
-            <ModalInputStart>#</ModalInputStart>
-            <ModalInputName
-                placeholder="e.g. plan-budget">    
-            </ModalInputName>
+            <span>#</span>
+            <NameInput 
+              placeholder='e.g. plan-budget'
+              onChange={e => setName(e.target.value)}
+             />    
           </ModalName>
-          <Description>
-            <ModalLabel>Description</ModalLabel>
-            <ModalOptional>(optional)</ModalOptional>
-          </Description>
-          <ModalInput></ModalInput>
-          <ModalP>What's this channel about?</ModalP>
-          <ModalLabel>Make private</ModalLabel>
-          <ModalPrivate>
-            <ModalPrivateInfo>
-              When a channel is set to private, it can only be
-              viewed or joined by invitation.
-            </ModalPrivateInfo>
-            <ModalCheckbox></ModalCheckbox>
-          </ModalPrivate>
-        </ModalBody>
-        <ModalFooter>
-          <ModalLearn>Learn more</ModalLearn>
-          <ModalCreate>Create</ModalCreate>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </Body>
+        <button onClick={handleCreate}>Next</button>
+      </Content>
+    </Overlay>
   )
 }
 

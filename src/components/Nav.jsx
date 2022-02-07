@@ -1,21 +1,27 @@
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
-import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import styled from 'styled-components'
 
-const Header = ({signOut}) => {
+import {MdHelpOutline} from 'react-icons/md'
+import {CgSearch} from 'react-icons/cg'
+import {BiTime} from 'react-icons/bi'
+import {useState} from 'react'
+
+const Nav = ({signOut}) => {
+  const [workspace, setWorkspace] = useState('Avion School')
+
   return (
     <Container>
       <Main>
-        <AccessTimeIcon/>
+        <BiTime size={22}/>
         <SearchBox>
-          <Search>
-            <input type="text" placeholder="Search..."/>
-          </Search>
+          <input 
+            type='text'
+            placeholder={`Search ${workspace}`}
+          />
+          <CgSearch size={18}/>
         </SearchBox>
-        <HelpOutlineIcon/>
       </Main>
       <UserContent>
-        <Name>Name</Name>
+        <MdHelpOutline size={22}/>
         <Image onClick={signOut}>
           <img src="https://i.imgur.com/6VBx3io.png"/>
         </Image>
@@ -24,7 +30,7 @@ const Header = ({signOut}) => {
   )
 }
 
-export default Header
+export default Nav
 
 // Styles
 const Container = styled.div`
@@ -33,28 +39,27 @@ const Container = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-  background: #350D36;
+  background: #0B161E;
   justify-content: center;
-  box-shadow: 0 1px 0 0 rgba(225, 225, 225, 0.1);
+  outline: 1px solid #34383E;
 `
 
 const Main = styled.div`
   display: flex;
   margin-left: 16px;
   margin-right: 16px;
+  svg { margin-right: 16px; }
 `
 
 const SearchBox = styled.div`
-  min-width: 400px;
-  margin-left: 16px;
-  margin-right: 16px;
-`
-
-const Search = styled.div`
-  width: 100%;
+  width: 732px;
+  display: flex;
   border-radius: 6px;
-  box-shadow: inset 0 0 0 1px rgb(104, 74, 105);
+  position: relative;
+  background: #3C454B;
+  align-items: center;
   input {
+    width: 98%;
     color: #FFF;
     border: none;
     padding-top: 4px;
@@ -65,21 +70,20 @@ const Search = styled.div`
     &:focus { outline: none; }
   }
 `
+
 const UserContent = styled.div`
+  right: 0;
+  display: flex;
+  position: fixed;
   align-items: center;
   padding-right: 16px;
-  position: absolute;
-  display: flex;
-  right: 0;
-  h4 { padding-right: 16px; }
 `
 
-const Name = styled.h4``
-
 const Image = styled.div`
-  height: 28px;
   width: 28px;
-  border: 2px solid #FFF;
+  height: 28px;
+  margin-left: 16px;
   border-radius: 3px;
+  border: 1px solid #FFF;
   img { width: 100%; }
 `
