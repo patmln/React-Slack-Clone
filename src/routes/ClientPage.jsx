@@ -28,6 +28,7 @@ const ClientPage = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: 38px auto;
+  overflow: hidden;
 `
 const Main = styled.div`
   color: #FFF;
