@@ -1,9 +1,9 @@
+import {sendMessage} from '../utils/api/messages'
 import {HiPaperAirplane} from 'react-icons/hi'
-import {sendMessage} from '../utils/api'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const MessageInput = ({auth}) => {
+const ChatInput = ({auth}) => {
   const [input, setInput] = useState('')
   const [message, setMessage] = useState('')
 
@@ -27,10 +27,12 @@ const MessageInput = ({auth}) => {
   )
 }
 
-export default MessageInput
+export default ChatInput
 
 const Container = styled.div`
+  width: 100%;
   padding: 0 20px;
+  margin-top: auto;
   padding-bottom: 24px;
 `
 

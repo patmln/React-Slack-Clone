@@ -1,13 +1,12 @@
+import {CgClose} from 'react-icons/cg'
+import styled from 'styled-components'
 import {useState} from 'react'
+
 import {
   Modal, ModalContent, 
   Header, ModalTitle, 
   ModalClose, ModalBody,
-<<<<<<< HEAD
   Description,Info, 
-=======
-  Description, Info, 
->>>>>>> d9ee63fc64d031d62447b36f99a4c2b7f9d4b2ee
   ModalLabel, ModalName, 
   ModalInputStart, NameInput,
   DescriptionInput, ModalOptional, 
@@ -17,62 +16,135 @@ import {
   ModalCreate, ModalFooter 
 } from './style.js'
 
-
-const AddChannelModal = props => {
+export default({show, onClose})=> {
   const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [_private, isPrivate] = useState(false)
 
-  const handleCreate = () => {
-    
+  const handleCreate = () => { 
+    console.log(name)
+    if (!name || name.length < 3 || name.length > 15) {
+      alert('Name should be within 3-15 characters long')  
+    } else {
+
+    }
   }
 
-  if (!props.show) return null
+  if (!show) return null
 
   return (
-    <Modal onClick={props.onClose}>
-      <ModalContent onClick={e => e.stopPropagation()}>
+    <Overlay onClick={onClose}>
+      <Content onClick={e => e.stopPropagation()}>
         <Header>
           <h2>Create a Channel</h2>
-          <ModalClose onClick={props.onClose}>&times;</ModalClose>
+          <CgClose 
+            size={20}
+            onClick={onClose}/>
         </Header>
-        <ModalBody>
-          <Info>
+        <Body>
+          <p>
             Channels are where your team communicates. They're best when
             organized around a topic - #marketing, for example.
-          </Info>
+          </p>
           <ModalLabel>Name</ModalLabel>
           <ModalName>
-            <ModalInputStart>#</ModalInputStart>
+            <span>#</span>
             <NameInput 
               placeholder='e.g. plan-budget'
               onChange={e => setName(e.target.value)}
              />    
           </ModalName>
-          <Description>
-            <ModalLabel>Description</ModalLabel>
-            <ModalOptional>(optional)</ModalOptional>
-          </Description>
-          <DescriptionInput
-            onChange={e => setDescription(e.target.value)}
-          />
-          <ModalP>What's this channel about?</ModalP>
-          <ModalLabel>Make private</ModalLabel>
-          <ModalPrivate>
-            <ModalPrivateInfo>
-              When a channel is set to private, it can only be
-              viewed or joined by invitation.
-            </ModalPrivateInfo>
-            <ModalCheckbox></ModalCheckbox>
-          </ModalPrivate>
-        </ModalBody>
-        <ModalFooter>
-          <ModalLearn>Learn more</ModalLearn>
-          <ModalCreate onClick={handleCreate}>Create</ModalCreate>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </Body>
+        <button onClick={handleCreate}>Next</button>
+      </Content>
+    </Overlay>
   )
 }
 
-export default AddChannelModal
+const Overlay = styled.div`
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+`
+
+const Content = styled.div`
+  width: 500px;
+  padding: 30px;
+  cursor: default;
+  border-radius: 8px;
+  background: #222529;
+  border: 1px solid #8d8d8e;
+
+  button {
+    float: right;
+    color: #d1d2d3;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 10px 15px;
+    background: transparent;
+    border: 1px solid #8d8d8e;
+    &:hover {
+      color: #222529;
+      background: #D1D2D3;
+    }
+  }
+`
+
+const Header = styled.div`
+  display: flex;
+  color: #d1d2d3;
+  align-items: center;
+  justify-content: space-between;
+  svg { cursor: pointer; }
+`
+
+const Body = styled.div`
+  padding-top: 20px;
+  p {
+    color: #b0b2b4;
+    font-size: 14px;
+  }
+  small {
+    color: gray;
+    font-size: 13px;
+  }
+`
+
+const ModalLabel = styled.h4`
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #d1d2d3;
+` 
+
+const ModalName = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    color: gray;
+    height: 38px;
+    padding: 10px 10px;
+    border: 1px solid gray;
+    border-radius: 4px 0 0 4px;
+    border-right-style: none;
+  }
+` 
+
+const NameInput = styled.input`
+  width: 100%;
+  color: #d1d2d3;
+  padding: 10px 10px;
+  background: transparent;
+  border: 1px solid #8d8d8e;
+  border-left-style: none;
+  border-radius: 0 4px 4px 0;
+  &:focus { outline: none; }
+  &::placeholder { color: #999b9d; }
+`

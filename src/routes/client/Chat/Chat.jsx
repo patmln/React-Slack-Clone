@@ -1,4 +1,4 @@
-import {getMessages} from '../../../utils/api'
+import {getMessages} from '../../../utils/api/messages'
 import {useEffect, useState} from 'react'
 import {BiLockAlt} from 'react-icons/bi'
 import {
@@ -8,17 +8,16 @@ import {
   ChannelInfo,
 } from './style'
 
-import MessageInput from '../../../components/MessageInput'
+import ChatInput from '../../../components/ChatInput'
 import Thread from '../../../components/Thread'
 
 const Chat = ({user}) => {
-  const {authData} = user
   const [channel, setChannel] = useState()
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
     (async() => {
-      const {data} = await getMessages(authData, '3') 
+      const {data} = await getMessages(user.auth, '3') 
       setMessages(data)
     })()
   }, [])
@@ -32,7 +31,7 @@ const Chat = ({user}) => {
         </ChannelName>
       </Header>
       <Thread messages={messages}/>
-      <MessageInput auth={authData}/>
+      <ChatInput auth={user.auth}/>
     </Container>
   )
 }
