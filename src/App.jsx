@@ -1,13 +1,30 @@
 import {Routes, Route} from 'react-router-dom'
+import {useState} from 'react'
 
-import SignUpPage from './routes/signup/SignUpPage'
+import SignUp from './routes/SignUp'
 import ClientPage from './routes/ClientPage'
 import ErrorPage from './routes/ErrorPage'
+import Login from './routes/Login'
 
-export default() => (
-  <Routes>
-    <Route path='/' element={<ClientPage/>}/>
-    <Route path='*' element={<ErrorPage/>}/>
-    <Route path='/signup' element={<SignUpPage/>}/>
-  </Routes>
-)
+export default() => {
+  const storedUser = JSON.parse(localStorage.getItem('user'))
+  const [user, setUser] = useState(storedUser)
+
+  const signOut = () => {
+    localStorage.removeItem('user')
+    setUser(null)
+  }
+
+  const mainPage = user 
+    ? <ClientPage user={user}/> 
+      : <Login setUser={setUser}/>
+
+  return (
+    <Routes>
+      <Route path='/' element={mainPage}/>
+      <Route path='/login' element={mainPage}/>
+      <Route path='/signup' element={<SignUp/>}/>
+      <Route path='*' element={<ErrorPage/>}/>
+    </Routes>
+  )
+}

@@ -1,9 +1,8 @@
-import {login} from '../utils/api'
-import {useState, useEffect, useRef} from 'react'
+import {login} from '../utils/api/user'
 import styled from 'styled-components'
+import {useState, useEffect, useRef} from 'react'
 import Snackbar from '../components/Snackbar/Snackbar'
 
-// LOGIN COMPONENT
 export default({setUser}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,12 +29,10 @@ export default({setUser}) => {
 
   const snackbarRef = useRef(null);
 
-
-
   return (
-    <Container>
+    <LoginPage>
       <Content>
-        <Logo src='./slack-logo.svg'/>
+        <img src='./slack-logo.svg' style={{height: '100px'}}/>
         <form onSubmit={handleSubmit}>
           <input 
             type='text' 
@@ -60,12 +57,11 @@ export default({setUser}) => {
         type={SnackbarType.success}
       />
       </Content>
-    </Container>
+    </LoginPage>
   )
 }
 
-// LOGIN STYLED
-const Container = styled.div`
+const LoginPage = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -84,8 +80,4 @@ const Content = styled.div`
   box-shadow: 
     0 1px 3px rgba(0, 0, 0, 0.12), 
     0 1px 2px rgba(0, 0, 0, 0.24);
-`
-
-const Logo = styled.img`
-  height: 100px;
 `
