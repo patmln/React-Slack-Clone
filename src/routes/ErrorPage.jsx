@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 
+var imageName = require('./404.png')
+
 const ErrorPage = () => {
   return ( 
     <Container>
-      <MessageBox>
-        <h1>404</h1>
-        <p>Page not found</p>
+        <Logo src={imageName} />
+        <MessageBox>
+        <h2>Opps! The page you were looking for was not found</h2>
         <ButtonGroup>
           <Button onclick="history.back(-1)">Go Back</Button>
           <Button>Go to Home Page</Button>
         </ButtonGroup>
-      </MessageBox>
+
+        </MessageBox>
     </Container>
   )
 }
@@ -18,19 +21,23 @@ const ErrorPage = () => {
 export default ErrorPage
 
 const Container = styled.div`
-  height: 100vh;
-  background: #2F3242;
+  width: 100%;
+  padding-top: 150px;
+  padding-left: 25%;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
 `
 
 const MessageBox = styled.div`
-  height: 200px;
-  width: 380px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: 50px;
-  color: #FFF;
+  margin-top: 50px;
+  padding-left: 10%;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #ddd;
   font-weight: 300;
   h4 {
     font-size: 60px;
@@ -40,11 +47,12 @@ const MessageBox = styled.div`
 `
 
 const ButtonGroup = styled.div`
-  margin-top: 40px;
+  margin-top: 60px;
+  padding-left: 14%
 `
 
 const Button = styled.a`
-  background: #68c950;
+  background: #1D2229;
   padding: 8px 25px;
   border-radius: 4px;
   color: #FFF;
@@ -58,4 +66,7 @@ const Button = styled.a`
     background: #5A5C6C;
     color: #fff;
   }
+`
+const Logo = styled.img`
+  height: 300px;
 `

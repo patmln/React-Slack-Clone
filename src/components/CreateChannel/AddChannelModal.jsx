@@ -2,6 +2,20 @@ import {CgClose} from 'react-icons/cg'
 import styled from 'styled-components'
 import {useState} from 'react'
 
+import {
+  Modal, ModalContent, 
+  Header, ModalTitle, 
+  ModalClose, ModalBody,
+  Description,Info, 
+  ModalLabel, ModalName, 
+  ModalInputStart, NameInput,
+  DescriptionInput, ModalOptional, 
+  ModalP, ModalPrivate, 
+  ModalPrivateInfo, 
+  ModalCheckbox, ModalLearn, 
+  ModalCreate, ModalFooter 
+} from './style.js'
+
 export default({show, onClose})=> {
   const [name, setName] = useState('')
 
