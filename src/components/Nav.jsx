@@ -10,16 +10,16 @@ const Nav = ({signOut}) => {
 
   return (
     <Container>
-      <HistoryIcon>
+      <Main>
         <BiTime size={22}/>
-      </HistoryIcon>
-      <SearchBox>
-        <input 
-          type='text'
-          placeholder={`Search ${workspace}`}
-        />
-        <CgSearch size={18}/>
-      </SearchBox>
+        <SearchBox>
+          <input 
+            type='text'
+            placeholder={`Search ${workspace}`}
+          />
+          <CgSearch size={18}/>
+        </SearchBox>
+      </Main>
       <UserContent>
         <MdHelpOutline size={22}/>
         <Image onClick={signOut}>
@@ -36,21 +36,19 @@ export default Nav
 const Container = styled.div`
   color: #FFF;
   z-index: 10;
-  width: 100%;
   display: flex;
   position: relative;
   align-items: center;
   background: #0B161E;
-  justify-content: space-around;
+  justify-content: center;
   outline: 1px solid #34383E;
 `
 
-const HistoryIcon = styled.div`
+const Main = styled.div`
   display: flex;
-  min-width: auto; 
-  padding-left: 16px;
-  padding-right: 20px;
-  align-items: center;
+  margin-left: 16px;
+  margin-right: 16px;
+  svg { margin-right: 16px; }
 `
 
 const SearchBox = styled.div`
@@ -61,7 +59,7 @@ const SearchBox = styled.div`
   background: #3C454B;
   align-items: center;
   input {
-    width: 95%;
+    width: 98%;
     color: #FFF;
     border: none;
     padding-top: 4px;
@@ -74,17 +72,18 @@ const SearchBox = styled.div`
 `
 
 const UserContent = styled.div`
+  right: 0;
   display: flex;
-  position: relative;
+  position: fixed;
   align-items: center;
-  padding-left: 16px;
   padding-right: 16px;
 `
 
 const Image = styled.div`
-  height: 28px;
   width: 28px;
-  border: 2px solid #FFF;
+  height: 28px;
+  margin-left: 16px;
   border-radius: 3px;
+  border: 1px solid #FFF;
   img { width: 100%; }
 `
