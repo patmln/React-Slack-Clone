@@ -12,7 +12,7 @@ export default({messages}) => (<>
             {msg.email}
             <Date>{msg.created_at}</Date>
           </Name>
-          <span>{msg.body}</span>
+          <p>{msg.body}</p>
         </MessageContent>
       </Message>
   ))}
@@ -42,10 +42,11 @@ const Name = styled.span`
   font-weight: 700;
   line-height: 1.4;
   margin-right: 8px;
-  span {
-    font-size: 13px;
-    margin-left: 8px;
-    font-weight: 400;
-    color: rgb(97, 96, 97);
-  }
+`
+
+const Date = styled.span`
+  font-size: 13px;
+  margin-left: 8px;
+  font-weight: 400;
+  color: rgb(97, 96, 97);
 `

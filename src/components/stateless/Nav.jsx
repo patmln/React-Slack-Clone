@@ -7,7 +7,7 @@ import {useState} from 'react'
 export default({signOut}) => (
   <Nav>
     <Main>
-      <BiTime size={22}/>
+      <BiTime size={22} style={{marginRight: '20px'}}/>
       <SearchBox>
         <input type='text' placeholder='Search Avion School' />
         <CgSearch size={18}/>
@@ -16,7 +16,7 @@ export default({signOut}) => (
     <UserContent>
       <MdHelpOutline size={22}/>
       <Image onClick={signOut}>
-        <img src='https://i.imgur.com/6VBx3io.png' style={{width: '100%'}}/>
+        <img src='./frog-boi.jpg'/>
       </Image>
     </UserContent>
   </Nav>
@@ -29,22 +29,18 @@ const Nav = styled.div`
   position: relative;
   align-items: center;
   background: #0B161E;
-  justify-content: center;
   outline: 1px solid #34383E;
-  svg { 
-    margin-right: 16px; 
-    &:hover {
-      cursor: pointer;
-      border-radius: 5px;
-      background: #34393F;
-    }
+  justify-content: space-between;
+  svg:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background: #34393F;
   }
 `
 
 const Main = styled.div`
   display: flex;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-left: 16%;
 `
 
 const SearchBox = styled.div`
@@ -55,7 +51,7 @@ const SearchBox = styled.div`
   background: #3C454B;
   align-items: center;
   input {
-    width: 98%;
+    width: 96%;
     color: #FFF;
     border: none;
     padding-top: 4px;
@@ -80,6 +76,8 @@ const Image = styled.div`
   height: 28px;
   cursor: pointer;
   margin-left: 16px;
-  border-radius: 3px;
-  border: 1px solid #FFF;
+  img { 
+    width: 100%; 
+    border-radius: 3px;
+  }
 `

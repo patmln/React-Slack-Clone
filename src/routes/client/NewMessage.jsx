@@ -1,10 +1,10 @@
-import SearchUser from '../../components/stateful/SearchUser'
+import SearchUser from '../../components/stateful/searchUser/SearchUser'
 import ChatInput from '../../components/stateful/ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const NewMessage = ({auth}) => {
-  const [selected, setSelected] = useState([])
+export default({auth}) => {
+  const [selected, setSelected] = useState(null)
 
   return (
     <Container>
@@ -21,8 +21,6 @@ const NewMessage = ({auth}) => {
     </Container>
   )
 }
-
-export default NewMessage
 
 const Container = styled.div`
   display: flex;

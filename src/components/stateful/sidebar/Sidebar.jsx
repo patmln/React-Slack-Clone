@@ -9,10 +9,12 @@ import {
 } from '../../../utils/api/channels'
 import ListItems from './ListItems'
 import TabItems from './TabItems'
+import Modal from '../../Modal'
 import Header from './Header'
 import Huddle from './Huddle'
 
 export default({auth}) => {
+  const [showModal, setShowModal] = useState(false)
   const [channels, setChannels] = useState([])
   const [recentDMs, setRecentDMs] = useState([])
   const [channelOpen, setChannelOpen] = useState(false)
@@ -39,6 +41,7 @@ export default({auth}) => {
         label='Channels' 
         addGeneral={true}
         itemImg={<CgLock/>}
+        setShowModal={setShowModal}
       />
       <ListItems 
         itemKey='email'
@@ -47,6 +50,7 @@ export default({auth}) => {
         itemImg={<img src='./frog-boi.jpg'/>}
       />
       <Huddle active={channelOpen}/>
+      <Modal onClose={() => setShowModal(false)} show={showModal}/>
     </Sidebar>
   )
 }
