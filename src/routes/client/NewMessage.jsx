@@ -1,19 +1,23 @@
+import SearchUser from '../../components/stateful/SearchUser'
+import ChatInput from '../../components/stateful/ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-import SearchUser from '../../components/SearchUser'
-import ChatInput from '../../components/ChatInput'
+const NewMessage = ({auth}) => {
+  const [selected, setSelected] = useState([])
 
-const NewMessage = ({user}) => {
-  const [receiverId, setReceiverId] = useState('')
-  const {auth} = user
   return (
     <Container>
-      <Header>
-        <h4>New message</h4>
-      </Header>
-      <SearchUser auth={auth}/>
-      <ChatInput auth={auth}/>
+      <Heading>New message</Heading>
+      <SearchUser 
+        auth={auth}
+        selected={selected}
+        setSelected={setSelected}
+      />
+      <ChatInput 
+        auth={auth}
+        selected={selected}
+      />
     </Container>
   )
 }
@@ -27,14 +31,11 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const Header = styled.div`
+const Heading = styled.h4`
   width: 100%;
   height: 49px;
-  display: flex;
+  line-height: 49px;
   padding-left: 20px;
   background: #1A1D21;
-  padding-right: 20px;
-  align-items: center;
   outline: 1px solid #35373B;
-  justify-content: space-between;
 `

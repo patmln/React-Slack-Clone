@@ -29,7 +29,7 @@ const listItemStyle = `
   align-items: center;
   span { margin-left: 8px; } 
 `
-export const ListItem = styled.div`
+const ListItem = styled.div`
   ${listItemStyle}
   &:hover { background: #313843; }
 `

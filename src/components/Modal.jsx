@@ -2,20 +2,6 @@ import {CgClose} from 'react-icons/cg'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-import {
-  Modal, ModalContent, 
-  Header, ModalTitle, 
-  ModalClose, ModalBody,
-  Description,Info, 
-  ModalLabel, ModalName, 
-  ModalInputStart, NameInput,
-  DescriptionInput, ModalOptional, 
-  ModalP, ModalPrivate, 
-  ModalPrivateInfo, 
-  ModalCheckbox, ModalLearn, 
-  ModalCreate, ModalFooter 
-} from './style.js'
-
 export default({show, onClose})=> {
   const [name, setName] = useState('')
 
@@ -32,12 +18,10 @@ export default({show, onClose})=> {
 
   return (
     <Overlay onClick={onClose}>
-      <Content onClick={e => e.stopPropagation()}>
+      <Container onClick={e => e.stopPropagation()}>
         <Header>
           <h2>Create a Channel</h2>
-          <CgClose 
-            size={20}
-            onClick={onClose}/>
+          <CgClose size={20} onClick={onClose}/>
         </Header>
         <Body>
           <p>
@@ -54,7 +38,7 @@ export default({show, onClose})=> {
           </ModalName>
         </Body>
         <button onClick={handleCreate}>Next</button>
-      </Content>
+      </Container>
     </Overlay>
   )
 }
@@ -72,7 +56,7 @@ const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `
 
-const Content = styled.div`
+const Container = styled.div`
   width: 500px;
   padding: 30px;
   cursor: default;

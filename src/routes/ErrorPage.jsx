@@ -1,54 +1,33 @@
 import styled from 'styled-components'
+import {SiSlack} from 'react-icons/si'
 
-var imageName = require('./404.png')
-
-const ErrorPage = () => {
-  return ( 
-    <Container>
-        <Logo src={imageName} />
-        <MessageBox>
-        <h2>Opps! The page you were looking for was not found</h2>
-        <ButtonGroup>
-          <Button onclick="history.back(-1)">Go Back</Button>
-          <Button>Go to Home Page</Button>
-        </ButtonGroup>
-
-        </MessageBox>
-    </Container>
-  )
-}
-
-export default ErrorPage
+export default() => ( 
+  <Container>
+    <SiSlack size={100} color={'whitesmoke'}/>
+    <img src='./404.png' style={{height: '150px'}}/>
+    <h4>Opps! The page you were looking for was not found</h4>
+    <ButtonGroup>
+      <Button onclick='history.back(-1)'>Go Back</Button>
+      <Button>Home Page</Button>
+    </ButtonGroup>
+  </Container>
+)
 
 const Container = styled.div`
-  width: 100%;
-  padding-top: 150px;
-  padding-left: 25%;
-  display: block;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: #19191b;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background: #fff;
-`
-
-const MessageBox = styled.div`
-  margin-top: 50px;
-  padding-left: 10%;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  color: #ddd;
-  font-weight: 300;
-  h4 {
-    font-size: 60px;
-    line-height: 46px;
-    margin-bottom: 40px;
-  }
 `
 
 const ButtonGroup = styled.div`
+  width: 50%;
+  display: flex;
   margin-top: 60px;
-  padding-left: 14%
+  justify-content: space-evenly;
 `
 
 const Button = styled.a`
@@ -56,17 +35,25 @@ const Button = styled.a`
   padding: 8px 25px;
   border-radius: 4px;
   color: #FFF;
-  font-weight: bold;
   font-size: 14px;
-  transition: all 0.3s linear;
   cursor: pointer;
-  text-decoration: none;
+  padding: 8px 25px;
+  border-radius: 4px;
+  font-weight: bold;
   margin-right: 10px;
-  &:hover {
-    background: #5A5C6C;
-    color: #fff;
+  background: #e01e5a;
+
+  text-decoration: none;
+  transition: all 0.3s linear;
+  :hover {
+    background: transparent;
+    outline: 1px solid #E01E5A;
   }
-`
-const Logo = styled.img`
-  height: 300px;
+  :last-child{ 
+    background: #2eb67d;   
+    :hover { 
+      background: transparent;
+      outline: 1px solid #2EB67D;
+    }
+  }
 `

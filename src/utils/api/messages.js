@@ -20,9 +20,18 @@ export const getMessages = async(auth, receiverId) => {
     const data = await res.json()
     return data
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return null
   }
 }
 
-export const recentDMs = async () => { }
+export const getRecentDMs = async(auth) => { 
+  try {
+    const res = await fetchAPI('users/recent', {headers: auth})
+    const data = await res.json()
+    return data
+  } catch(e) {
+    console.error(e)
+    return null
+  }
+}

@@ -1,61 +1,65 @@
+import Toast from '../components/stateful/Toast'
+import Form from '../components/stateless/Form'
+import {inputData} from '../data/authInputData'
 import {login} from '../utils/api/user'
 import styled from 'styled-components'
-import {useState, useEffect, useRef} from 'react'
-import Snackbar from '../components/Snackbar/Snackbar'
+import {Link} from 'react-router-dom'
+import {useState} from 'react'
 
 export default({setUser}) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [toast, setToast] = useState({
+    show: false, 
+    type:'fail', 
+    message: '', 
+  })
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-    if (!email || !password) return
+    const email = e.target.email.value
+    const password = e.target.password.value
 
-    const user = {
-      'email': email, 
-      'password': password
+    if (!email || !password) {
+      setToast({ 
+        show: true, 
+        type: 'fail',
+        message: 'Fields cannot be empty',
+      })
+    } else {
+      const userData = {
+        'email': email,
+        'password': password
+      }
+
+      const user = await login(userData)
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user))
+        setUser(user)
+      }
     }
-
-    const data = await login(user)
-    localStorage.setItem('user', JSON.stringify(data))
-    setUser(data)
   }
 
-  //Snackbar
-  const SnackbarType = {
-    success: "success",
-    fail: "fail",
-  };
-
-  const snackbarRef = useRef(null);
+  const loginInputData = [...inputData] 
+  loginInputData.pop()
 
   return (
     <LoginPage>
       <Content>
-        <img src='./slack-logo.svg' style={{height: '100px'}}/>
-        <form onSubmit={handleSubmit}>
-          <input 
-            type='text' 
-            placeholder='Email'
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input 
-            type='password' 
-            placeholder='Password'
-            onChange={e => setPassword(e.target.value)}
-          />
-          <button 
-          type='submit'
-          onClick={() => {
-            snackbarRef.current.show();
-          }}
-          >Sign In</button>
-        </form>
-        <Snackbar
-        ref={snackbarRef}
-        message="Task Completed Successfully!"
-        type={SnackbarType.success}
-      />
+        <img src='./slack-logo.svg'/>
+        <h3>Sign in to Slack</h3>
+        <p>We suggest using the <strong>email address you use at work.</strong></p> 
+        <Form
+          btnLabel='Sign In'
+          inputData={loginInputData}
+          handleSubmit={handleSubmit}
+        />
+        <Link to='../signup'>
+          Create an account
+        </Link>
+        <Toast 
+          type={toast.type} 
+          show={toast.show} 
+          message={toast.message}
+        />
       </Content>
     </LoginPage>
   )
@@ -65,19 +69,36 @@ const LoginPage = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  overflow: hidden;
+  color: whitesmoke;
   align-items: center;
-  background: #f8f8f8;
+  background: #19191b;
   justify-content: center;
 `
 
 const Content = styled.div`
-  padding: 100px;  
   display: flex;
+  padding: 70px;
   border-radius: 5px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.12), 
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  img { 
+    height: 110px; 
+    margin-bottom: 40px;
+  }
+  h3 { 
+    font-size: 40px; 
+    margin-bottom: 15px;
+  }
+  p { 
+    font-size: 16px; 
+    margin-bottom: 20px;
+  }
+  a {
+    margin-top: 25px;
+    color: whitesmoke;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
 `

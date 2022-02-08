@@ -1,8 +1,8 @@
-import {getAllUsers} from '../utils/api/user'
+import {getAllUsers} from '../../utils/api/user'
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
-const SearchUser = ({auth}) => {
+export default({auth, selected, setSelected}) => {
   const [search, setSearch] = useState('')
   const [userList, setUserList] = useState([])
   const [suggestions, setSuggestions] = useState([])
@@ -13,6 +13,8 @@ const SearchUser = ({auth}) => {
       setUserList(res.data)
     })()
   }, [])
+
+  const handleClick = id => setSelected([...selected, id])      
 
   const handleOnChange = input => {
     let matches = []
@@ -35,19 +37,20 @@ const SearchUser = ({auth}) => {
       />
     </Search>
     <SearchResult hide={!suggestions.length}>
-    {suggestions.map(({email}, index) => {
+    {suggestions.map((user, index) => {
       return (
-        <ResultItem key={index}>
+        <ResultItem 
+          key={index}
+          onClick={() => handleClick(user.id)}
+          >
           <img src='./frog-boi.jpg' alt=''/>
-          <strong>{email}</strong>
+          <strong>{user.email}</strong>
         </ResultItem>
       )
     })}
     </SearchResult>
   </>)  
 }
-
-export default SearchUser
 
 const Search = styled.div`
   width: 100%;
