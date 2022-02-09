@@ -1,7 +1,7 @@
-import Form from '../components/stateless/Form'
-import {inputData} from '../data/authInputData'
-import {register} from '../utils/api/user'
+import {inputData} from '../../data/authInputData'
+import {register} from '../../utils/api/user'
 import styled from 'styled-components'
+import Form from '../stateless/Form'
 import {useState} from 'react'
 
 export default() => {

@@ -1,28 +1,30 @@
-import {API_URI, fetchAPI} from './fetchAPI'
+import {axiosAPI} from './axiosAPI'
 
-export const sendMessage = async(auth, message) => {
+export const sendMessage = async(auth, body) => {
   try {
-    const res = await fetchAPI('messages', {
-      method: 'POST',
-      headers: auth,
-      body: JSON.stringify(message)
-    })
-  } catch(e) {
-    console.error(e)
-  }
+    await axiosAPI.post('messages', body, {headers: auth})
+  } catch(e) { console.error(e) }
 }
 
 export const getMessages = async(auth, receiverId) => {
   try {
-    const res = await fetchAPI(
+    const {data} = await axiosAPI(
       `messages?receiver_class=User&receiver_id=${receiverId}`,
-      { headers: auth })
-    const data = await res.json()
+      { headers: auth }
+    )
     return data
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return null
   }
 }
 
-export const recentDMs = async () => { }
+export const getRecentDMs = async(auth) => { 
+  try {
+    const {data: {data}} = await axiosAPI('users/recent', {headers: auth})
+    return data
+  } catch(e) {
+    console.error(e)
+    return null
+  }
+}

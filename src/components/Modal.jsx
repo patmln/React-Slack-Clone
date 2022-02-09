@@ -26,8 +26,7 @@ export default({show, onClose})=> {
   if (!show) return null
 
   return (
-    <Overlay 
-      onClick={() => {onClose(); resetToggleState();}}>
+    <Overlay onClick={() => {onClose(); resetToggleState();}}>
       <Container 
         onClick={e => e.stopPropagation()}
         className={formCreateChannelToggle ? "showForm" : "hideForm"}

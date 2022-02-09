@@ -1,46 +1,55 @@
 import {RiArrowRightSFill} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
+import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
-import {CgLock} from 'react-icons/cg'
 import {HiPlus} from 'react-icons/hi'
-import Modal from '../../Modal'
 import {useState} from 'react'
 
-export default({label, list}) => {
-  const [show, setShow] = useState(false)
-  const [active, setActive] = useState(false)
-  const [visible, setVisible] = useState(false)
+export default(props) => {
+  const {
+    addGeneral,
+    label, list,
+    setShowModal,
+    itemKey, itemImg
+  } = props
+
+  const [isRotate, setIsRotate] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
 
   return (
     <div style={{marginTop: '10px'}}>
       <Tab 
-        active={active} 
-        visible={visible}
-        onMouseEnter={() => setVisible(true)}
-        onMouseLeave={() => setVisible(false)}
+        isRotate={isRotate} 
+        showOptions={showOptions}
+        onMouseEnter={() => setShowOptions(true)}
+        onMouseLeave={() => setShowOptions(false)}
       >
         <div style={{display: 'flex'}}>
           <RiArrowRightSFill 
             size={20} 
-            onClick={() => setActive(!active)} 
+            onClick={() => setIsRotate(!isRotate)} 
           />
-          <p>{label}</p>
+          <p style={{marginLeft:'8px'}}>{label}</p>
         </div>
         <div>
-          <FiMoreVertical size={18}/>
-          <HiPlus size={20} onClick={() => setShow(true)}/>
+          <button>
+            <FiMoreVertical size={18} color={'#b0b2b4'}/>
+          </button>
+          <button onClick={() => setShowModal(true)}>
+            <HiPlus size={20} color={'#b0b2b4'}/>
+          </button>
         </div>
-        <Modal onClose={() => setShow(false)} show={show}/>
       </Tab>
-      <List active={active}>
-        <ListItem style={{background: '#537aa6', color: '#fff'}}>
-          <CgLock/>
-          <p>general</p>
-        </ListItem> 
-        {list.map(({name}, index) => (
-          <ListItem key={index}>
-            <CgLock/>
-            <p>{name}</p>
+      <List isRotate={isRotate}>
+        {addGeneral && 
+          <ListItem to=''>
+            # general
+          </ListItem>
+        }
+        {list.map((item, index) => (
+          <ListItem to='' key={index}>
+            {itemImg}
+            <p>{item[itemKey]}</p>
           </ListItem> 
         ))}
       </List>
@@ -49,18 +58,27 @@ export default({label, list}) => {
 }
 
 const List = styled.div`
-  display: ${({ active }) => !active && 'none'}
+  display: ${
+    ({ isRotate }) => !isRotate && 'none'
+  }
 `
 
-const ListItem = styled.div`
+const ListItem = styled(NavLink)`
   height: 28px;
   display: flex;
+  color: #b0b2b4;
   font-size: 15px;
   cursor: pointer;
   padding-left: 36px;
   align-items: center;
+  text-decoration: none;
+  :hover { background: #313843; }
+  ${({ active }) => active && `
+    color: #FFF;
+    background: #537AA6;`
+  }
+  img { height: 20px; }
   p { margin-left: 8px; } 
-  &:hover { background: #313843; }
 `
 
 const Tab = styled.div`
@@ -72,18 +90,18 @@ const Tab = styled.div`
   padding-right: 12px;
   align-items: center;
   justify-content: space-between;
-  svg:hover {
-    border-radius: 5px;
-    background: #34393F;
+  button { 
+    cursor: pointer;
+    background: none; 
   }
   div:first-child svg {
-    transition: all .3s ease;
+    transition: transform .1s ease;
     transform: rotate(${
-      ({ active }) => active ? '90deg' : '0deg'
+      ({ isRotate }) => isRotate ? '90deg' : '0deg'
     });
   }
   div:last-child {
-    transition: all .2s ease;
-    opacity: ${({ visible }) => visible ? '1' : '0'}
+    transition: opacity .1s ease-out;
+    opacity: ${({ showOptions }) => showOptions ? '1' : '0'}
   }
 `

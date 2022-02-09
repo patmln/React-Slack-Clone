@@ -1,15 +1,19 @@
 import {sendMessage} from '../../utils/api/messages'
 import {HiPaperAirplane} from 'react-icons/hi'
 import styled from 'styled-components'
-import {useState} from 'react'
+import {useRef} from 'react'
 
-export default({auth}) => {
-  const [input, setInput] = useState('')
-  const [message, setMessage] = useState('')
+export default({auth, selected}) => {
+  const inputRef = useRef(null)
 
-  const handleSend = () => {
-    console.log(input)
-    // sendMessage(auth, messageObj)
+  const handleClick = () => {
+    const input = inputRef.current.value
+    sendMessage(auth, {
+      'receiver_id': selected,
+      'receiver_class': 'User',
+      'body': input
+    })
+    input = ''
   }
 
   return (
@@ -17,9 +21,10 @@ export default({auth}) => {
       <Container>
         <input 
           type='text' 
+          ref={inputRef}
           placeholder='Message here...'
-          onChange={e => setInput(e.target.value)}/>
-        <button onClick={handleSend}>
+        />
+        <button onClick={handleClick}>
           <HiPaperAirplane size={18} color='white'/>
         </button>
       </Container> 

@@ -1,9 +1,9 @@
-import Toast from '../components/stateful/Toast'
-import Form from '../components/stateless/Form'
-import {inputData} from '../data/authInputData'
-import {login} from '../utils/api/user'
+import {inputData} from '../../data/authInputData'
+import {login} from '../../utils/api/user'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import Toast from '../stateful/Toast'
+import Form from '../stateless/Form'
 import {useState} from 'react'
 
 export default({setUser}) => {
