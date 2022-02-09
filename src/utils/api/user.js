@@ -1,29 +1,16 @@
-import {API_URI, fetchAPI} from './fetchAPI'
+import {axiosAPI} from './axiosAPI'
 import {getAuth} from './getAuth'
 
-export const register = async(userData) => {
-  try {
-    const res = await fetchAPI('auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData)
-    })
-  } catch(e) {
-    console.error(e)
-  }
+export const register = async(body) => {
+  try { await axiosAPI.post('auth', body) } 
+  catch(e) { console.error(e) }
 }
 
-export const login = async(userData) => {
+export const login = async(body) => {
   try {
-    const res = await fetchAPI('auth/sign_in', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData)
-    })
+    const res = await axiosAPI.post('auth/sign_in', body)
     const auth = getAuth(res)
-    const {data}= await res.json()
-
-    return {data, auth}
+    return {res: {data}, auth}
   } catch(e) {
     console.error(e)
     return null
@@ -32,8 +19,7 @@ export const login = async(userData) => {
 
 export const getAllUsers = async(auth) => {
   try {
-    const res = await fetchAPI('users', { headers: auth })
-    const data = await res.json()
+    const {data} = await axiosAPI('users', {headers: auth})
     return data
   } catch(err) {
     console.error(err)

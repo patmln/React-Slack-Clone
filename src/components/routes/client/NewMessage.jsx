@@ -1,5 +1,5 @@
-import SearchUser from '../../components/stateful/searchUser/SearchUser'
-import ChatInput from '../../components/stateful/ChatInput'
+import SearchUser from '../../stateful/searchUser/SearchUser'
+import ChatInput from '../../stateful/ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
 

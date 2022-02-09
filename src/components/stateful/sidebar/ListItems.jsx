@@ -1,5 +1,6 @@
 import {RiArrowRightSFill} from 'react-icons/ri'
 import {FiMoreVertical} from 'react-icons/fi'
+import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 import {HiPlus} from 'react-icons/hi'
 import {useState} from 'react'
@@ -8,8 +9,8 @@ export default(props) => {
   const {
     addGeneral,
     label, list,
-    itemKey, itemImg,
-    setShowModal
+    setShowModal,
+    itemKey, itemImg
   } = props
 
   const [isRotate, setIsRotate] = useState(false)
@@ -41,12 +42,12 @@ export default(props) => {
       </Tab>
       <List isRotate={isRotate}>
         {addGeneral && 
-          <ListItem style={{background: '#537aa6', color: '#fff'}}>
+          <ListItem to=''>
             # general
           </ListItem>
         }
         {list.map((item, index) => (
-          <ListItem key={index}>
+          <ListItem to='' key={index}>
             {itemImg}
             <p>{item[itemKey]}</p>
           </ListItem> 
@@ -57,16 +58,25 @@ export default(props) => {
 }
 
 const List = styled.div`
-  display: ${({ isRotate }) => !isRotate && 'none'}
+  display: ${
+    ({ isRotate }) => !isRotate && 'none'
+  }
 `
 
-const ListItem = styled.div`
+const ListItem = styled(NavLink)`
   height: 28px;
   display: flex;
+  color: #b0b2b4;
   font-size: 15px;
   cursor: pointer;
   padding-left: 36px;
   align-items: center;
+  text-decoration: none;
+  :hover { background: #313843; }
+  ${({ active }) => active && `
+    color: #FFF;
+    background: #537AA6;`
+  }
   img { height: 20px; }
   p { margin-left: 8px; } 
 `

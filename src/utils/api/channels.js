@@ -1,23 +1,14 @@
-import {API_URI, fetchAPI} from './fetchAPI'
+import {axiosAPI} from './axiosAPI'
 
-export const createChannel = async(auth, data) => {
+export const createChannel = async(auth, body) => {
   try {
-    const res = await fetchAPI('channels', {
-      method: 'POST',
-      headers: auth,
-      body: JSON.stringify(data)
-    })
-  } catch(e) {
-    console.error(e)
-  }
+    await axiosAPI.post('channels', body, {headers: auth})
+  } catch(e) { console.error(e) }
 }
 
 export const getAllUsersChannels = async(auth) => {
   try {
-    const res = await fetchAPI('channels', {
-      headers: auth 
-    })
-    const data = await res.json()
+    const {data} = await axiosAPI('channels', {headers: auth})
     return data
   } catch(e) {
     console.error(e)
@@ -25,20 +16,25 @@ export const getAllUsersChannels = async(auth) => {
   }
 }
 
-export const getChannelDetails = async() => { }
-
-export const addMemberToChannel = async(auth) => {
-  const options = {
-    method: 'POST',
-    headers: auth, 
-    body: {}
+export const getChannelDetails = async(auth, id) => {
+  try {
+    const {data} = await axiosAPI('channels/'+id, {headers: auth})
+    return data
+  } catch(e) { 
+    console.error(e)  
+    return null
   }
+}
+
+export const addMemberToChannel = async(auth, body) => {
+  try {
+    await axiosAPI.post('channel/add_member', body, {headers: auth})
+  } catch(e) { console.error(e) }
 }
 
 export const allUsersOwnedChannel = async(auth) => {
   try {
-    const res = await fetchAPI('channel/owned', { headers: auth })
-    const data = await res.json()
+    const {data} = await axiosAPI('channel/owned', {headers: auth})
     return data
   } catch(err) {
     console.log(err)

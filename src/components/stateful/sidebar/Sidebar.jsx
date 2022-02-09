@@ -14,19 +14,25 @@ import Header from './Header'
 import Huddle from './Huddle'
 
 export default({auth}) => {
-  const [showModal, setShowModal] = useState(false)
   const [channels, setChannels] = useState([])
   const [recentDMs, setRecentDMs] = useState([])
+  const [showModal, setShowModal] = useState(false)
   const [channelOpen, setChannelOpen] = useState(false)
 
+  // Todo: update recentDMs when new message sent
+  // option 1: useContext hook to create global variable
+  // option 2: move sidebar states in Routes.jsx
+  
   useEffect(() => {
     (async() => {
       const usersChannels = await getAllUsersChannels(auth)
       setChannels(usersChannels.data)
 
       const usersRecentDMs = await getRecentDMs(auth)
-      const uniqueByEmail = usersRecentDMs.data.filter((dm, index, self) =>
-        index === self.findIndex(t =>  t.email === dm.email))
+      const uniqueByEmail = usersRecentDMs.filter(
+        (dm, index, self) =>
+          index === self.findIndex(t =>  t.email === dm.email)
+      )
       setRecentDMs(uniqueByEmail)
     })()
   }, [])   
