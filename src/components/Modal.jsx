@@ -13,7 +13,7 @@ export default({show, onClose})=> {
     if (!name || name.length < 3 || name.length > 15) {
       alert('Name should be within 3-15 characters long')  
     } else {
-      setFormCreateChannelToggle(!formCreateChannelToggle);
+      setFormCreateChannelToggle(!formCreateChannelToggle)
       setFormAddUserToggle(!formAddUserToggle)
     }
   }
@@ -21,6 +21,7 @@ export default({show, onClose})=> {
   const resetToggleState = () => {
     setFormCreateChannelToggle(true);
     setFormAddUserToggle(false)
+    setName('')
   }
 
   if (!show) return null
