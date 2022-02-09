@@ -1,41 +1,27 @@
-import {useState,useEffect} from 'react'
+import {
+  useChannels
+} from '../../../contexts/ChannelsProvider'
+import {
+  useMessages
+} from '../../../contexts/MessagesProvider'
+import {useState, useEffect} from 'react'
+import {
+  useAuth
+} from '../../../contexts/AuthProvider'
 import styled from 'styled-components'
 import {CgLock} from 'react-icons/cg'
-import {
-  getRecentDMs
-} from '../../../utils/api/messages'
-import {
-  getAllUsersChannels
-} from '../../../utils/api/channels'
 import ListItems from './ListItems'
 import TabItems from './TabItems'
 import Modal from '../../Modal'
 import Header from './Header'
 import Huddle from './Huddle'
 
-export default({auth}) => {
-  const [channels, setChannels] = useState([])
-  const [recentDMs, setRecentDMs] = useState([])
+export default() => {
+  const {user} = useAuth()
+  const {channels, setChannels} = useChannels()
+  const {recentDMs, setRecentDMs} = useMessages()
   const [showModal, setShowModal] = useState(false)
   const [channelOpen, setChannelOpen] = useState(false)
-
-  // Todo: update recentDMs when new message sent
-  // option 1: useContext hook to create global variable
-  // option 2: move sidebar states in Routes.jsx
-  
-  useEffect(() => {
-    (async() => {
-      const usersChannels = await getAllUsersChannels(auth)
-      setChannels(usersChannels.data)
-
-      const usersRecentDMs = await getRecentDMs(auth)
-      const uniqueByEmail = usersRecentDMs.filter(
-        (dm, index, self) =>
-          index === self.findIndex(t =>  t.email === dm.email)
-      )
-      setRecentDMs(uniqueByEmail)
-    })()
-  }, [])   
 
   return (
     <Sidebar>

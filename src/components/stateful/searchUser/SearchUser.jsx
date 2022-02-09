@@ -1,32 +1,19 @@
-import {getAllUsers} from '../../../utils/api/user'
+import {useUsers} from '../../../contexts/UsersProvider'
 import {useEffect, useState, useRef} from 'react'
 import Suggestions from './Suggestions'
 import styled from 'styled-components'
 import Selected from './Selected'
 
-export default({auth, selected, setSelected}) => {
+export default() => {
   const inputRef = useRef()
-  const [userList, setUserList] = useState([])
+  const {users, selectedId} = useUsers()
   const [suggestions, setSuggestions] = useState([])
-
-  useEffect(() => {
-    (async()=> {
-      const res = await getAllUsers(auth)
-      setUserList(res.data)
-    })()
-  }, [])
-
-  const handleClick = id => {
-    setSelected(id)
-    inputRef.current.value = ''
-    inputRef.current.placeholder = ''
-  }
 
   const handleOnChange = () => {
     const input = inputRef.current.value
     let matches = []
     if (input.length > 0) {
-      matches = userList.filter(user => {
+      matches = users.filter(user => {
         const regex = new RegExp(`${input}`,'gi')
         return user.email.match(regex)
       })
@@ -38,13 +25,7 @@ export default({auth, selected, setSelected}) => {
     <>
       <Search>
         <label>To:</label>
-        {selected && 
-          <Selected 
-            userList={userList}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        } 
+        {selectedId && <Selected/>} 
         <input
           ref={inputRef}
           onChange={handleOnChange}
@@ -52,8 +33,8 @@ export default({auth, selected, setSelected}) => {
         />
       </Search>
       <Suggestions 
-        list={suggestions} 
-        handleClick={handleClick}
+        list={suggestions}
+        inputRef={inputRef}
       />
     </>
   )  

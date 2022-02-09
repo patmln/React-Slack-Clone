@@ -1,39 +1,36 @@
 import ChatInput from '../../components/stateful/ChatInput'
 import SampleThread from '../../components/SampleThread'
-//import {getAllUsers} from '../../utils/api'
+import {useAuth} from '../../../contexts/AuthProvider'
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
-export default({user}) => {
-  const auth = user.authData
+const baseUrl= 'https://static.wikia.nocookie.net/theoffice/images/'
+export default() => (
+  <Channel>
+    <Header>
+      <h4>Dunder Mifflin</h4>
+      <Button>
+        <Image src={baseUrl+'6/67/Pam_Beesley.jpg'} />
+        <Image src={baseUrl+'e/e9/Character_-_JimHalpert.png'} />
+        <Image src={baseUrl+'0/0b/Angela_Martin.jpg'} />
+        15
+      </Button>
+    </Header>
+    <Search>
+      <button>+ Add a bookmark</button>
+    </Search>
+    <Thread>
+      <SampleThread/>
+    </Thread>
+    <div style={{marginTop: '0'}}>
+      <ChatInput/>
+    </div>
+  </Channel>
+)
 
-  return (
-    <Container>
-      <Header>
-        <h4>Dunder Mifflin</h4>
-        <Button>
-          <Image src='https://static.wikia.nocookie.net/theoffice/images/6/67/Pam_Beesley.jpg' />
-          <Image src='https://static.wikia.nocookie.net/theoffice/images/e/e9/Character_-_JimHalpert.PNG' />
-          <Image src='https://static.wikia.nocookie.net/theoffice/images/0/0b/Angela_Martin.jpg' />
-          15
-        </Button>
-      </Header>
-      <Search>
-        <button>+ Add a bookmark</button>
-      </Search>
-      <Thread>
-        <SampleThread/>
-      </Thread>
-      <MessageInputBox>
-        <ChatInput auth={auth} />
-      </MessageInputBox>
-    </Container>
-  )
-}
-
-const Container = styled.div`
+const Channel = styled.div`
   display: flex;
-  color: #d1d2d3;
+  color: #D1D2D3;
   flex-direction: column;
 `
 
@@ -59,42 +56,36 @@ const Search = styled.div`
   justify-content: space-between;
 
   button {
-    font-size: 12px;
-    color: #a0a0a2;
-    padding: 5px 5px;
-    background-color: transparent;
     border: none;
+    color: #A0A0A2;
+    font-size: 12px;
     cursor: pointer;
-    &:hover {
+    padding: 5px 5px;
+    background: none;
+    :hover {
       background-color: #232529;
       border-radius: 4px;
     }
   }
 `
 
-const MessageInputBox = styled.div`
-  margin-top: 0%;
-`
-
 const Button = styled.button`
   display: flex;
+  color: #A0A0A2;
+  cursor: pointer;
+  padding: 5px 5px;
+  background: none;
+  border-radius: 4px;
   align-items: center;
-  color: #a0a0a2;
-    padding: 5px 5px;
-    background-color: transparent;
-    border: 1px solid #34383E;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover {
-      background-color: #232529;
-    }
+  border: 1px solid #34383E;
+  :hover { background: #232529; }
 `
 
 const Image = styled.img`
-  border: 1px solid black;
-  border-radius: 4px;
   width: 25px;
   height: 25px;
+  border-radius: 4px;
+  border: 1px solid #000;
 `
 
 const Thread = styled.div`

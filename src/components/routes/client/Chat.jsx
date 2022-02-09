@@ -1,18 +1,22 @@
-import Thread from '../../components/stateless/Conversation'
-import ChatInput from '../../components/stateful/ChatInput'
-import {getMessages} from '../../utils/api/messages'
+import {useMessages} from '../../../contexts/MessagesProvider'
+import Conversations from '../../stateless/Conversations'
+import {useAuth} from '../../../contexts/AuthProvider'
+import ChatInput from '../../stateful/ChatInput'
 import {useEffect, useState} from 'react'
 import {BiLockAlt} from 'react-icons/bi'
 import styled from 'styled-components'
 
-export default({user}) => {
-  const [channel, setChannel] = useState()
-  const [messages, setMessages] = useState([])
+export default() => {
+  const {user} = useAuth()
+  const {
+    conversations, setConversations,
+    getMessages
+  } = useMessages()
 
   useEffect(() => {
     (async() => {
-      const {data} = await getMessages(user.auth, '3') 
-      setMessages(data)
+      const {data} = await getMessages('3') 
+      setConversations(data)
     })()
   }, [])
 
@@ -24,8 +28,8 @@ export default({user}) => {
           batch15
         </ChannelName>
       </Header>
-      <Thread messages={messages}/>
-      <ChatInput auth={user.auth}/>
+      <Conversations/>
+      <ChatInput/>
     </Container>
   )
 }

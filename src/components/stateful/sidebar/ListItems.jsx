@@ -16,6 +16,7 @@ export default(props) => {
   const [isRotate, setIsRotate] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
 
+
   return (
     <div style={{marginTop: '10px'}}>
       <Tab 
@@ -46,7 +47,7 @@ export default(props) => {
             # general
           </ListItem>
         }
-        {list.map((item, index) => (
+        {list && list.map((item, index) => (
           <ListItem to='' key={index}>
             {itemImg}
             <p>{item[itemKey]}</p>

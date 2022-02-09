@@ -1,17 +1,19 @@
+import {useUsers} from '../../../contexts/UsersProvider'
 import styled from 'styled-components'
 import {CgClose} from 'react-icons/cg'
 
-export default({userList, selected, setSelected}) => {
-  const getEmailById = (userList, selected) => {
-    const foundUser = userList.find(
-      user => user.id === selected)
-    return foundUser.email
-  }
+export default() => {
+  const {
+    getEmailById, 
+    selectedId, setSelectedId
+  } = useUsers()
+  const handleClick = () => setSelectedId(null)
+
   return (
     <Selected>
       <Image src='./frog-boi.jpg'/>
-      <p>{getEmailById(userList, selected)}</p>
-      <CgClose size={20} onClick={() => setSelected(null)}/>
+      <p>{getEmailById(selectedId)}</p>
+      <CgClose size={20} onClick={handleClick}/>
     </Selected>
   )
 }
