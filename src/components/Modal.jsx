@@ -1,7 +1,7 @@
 import {CgClose} from 'react-icons/cg'
 import styled from 'styled-components'
 import {useState} from 'react'
-import SearchUser from './stateful/SearchUser'
+import SearchUser from './stateful/searchUser/SearchUser'
 
 export default({show, onClose})=> {
   const [name, setName] = useState('')
