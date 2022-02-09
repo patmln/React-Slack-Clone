@@ -49,3 +49,7 @@ const Name = styled.span`
     color: rgb(97, 96, 97);
   }
 `
+
+const Date = styled.div`
+
+`

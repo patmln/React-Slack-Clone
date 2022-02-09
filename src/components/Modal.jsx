@@ -1,27 +1,40 @@
 import {CgClose} from 'react-icons/cg'
 import styled from 'styled-components'
 import {useState} from 'react'
+import SearchUser from './stateful/SearchUser'
 
 export default({show, onClose})=> {
   const [name, setName] = useState('')
+  const [formCreateChannelToggle, setFormCreateChannelToggle] = useState(true)
+  const [formAddUserToggle, setFormAddUserToggle] = useState(false)
 
   const handleCreate = () => { 
     console.log(name)
     if (!name || name.length < 3 || name.length > 15) {
       alert('Name should be within 3-15 characters long')  
     } else {
-
+      setFormCreateChannelToggle(!formCreateChannelToggle);
+      setFormAddUserToggle(!formAddUserToggle)
     }
+  }
+
+  const resetToggleState = () => {
+    setFormCreateChannelToggle(true);
+    setFormAddUserToggle(false)
   }
 
   if (!show) return null
 
   return (
-    <Overlay onClick={onClose}>
-      <Container onClick={e => e.stopPropagation()}>
+    <Overlay 
+      onClick={() => {onClose(); resetToggleState();}}>
+      <Container 
+        onClick={e => e.stopPropagation()}
+        className={formCreateChannelToggle ? "showForm" : "hideForm"}
+      >
         <Header>
           <h2>Create a Channel</h2>
-          <CgClose size={20} onClick={onClose}/>
+          <CgClose size={20} onClick={() => {onClose(); resetToggleState();}}/>
         </Header>
         <Body>
           <p>
@@ -38,6 +51,22 @@ export default({show, onClose})=> {
           </ModalName>
         </Body>
         <button onClick={handleCreate}>Next</button>
+      </Container>
+      <Container 
+        onClick={e => e.stopPropagation()}
+        className={formAddUserToggle ? "showForm" : "hideForm"}
+      >
+        <Header>
+          <h2>Add Members</h2>
+          <CgClose size={20} onClick={() => {onClose(); resetToggleState();}}/>
+        </Header>
+        <Body2>
+          <ChannelName># {name}</ChannelName>
+          <SearchUser />
+          <p>Users to be added:</p>
+          <UserList></UserList>
+        </Body2>
+        <button>Create</button>
       </Container>
     </Overlay>
   )
@@ -80,6 +109,10 @@ const Container = styled.div`
       background: #D1D2D3;
     }
   }
+
+  &.hideForm{
+    display: none
+  }
 `
 
 const Header = styled.div`
@@ -113,7 +146,7 @@ const ModalName = styled.div`
   align-items: center;
   span {
     color: gray;
-    height: 38px;
+    height: 37px;
     padding: 10px 10px;
     border: 1px solid gray;
     border-radius: 4px 0 0 4px;
@@ -131,4 +164,22 @@ const NameInput = styled.input`
   border-radius: 0 4px 4px 0;
   &:focus { outline: none; }
   &::placeholder { color: #999b9d; }
+`
+
+const Body2 = styled.div`
+  padding-top: 10px;
+  p {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+`
+
+const ChannelName = styled.div`
+  color: #b0b2b4;
+  font-size: 14px;
+  padding-bottom: 30px;   
+`
+
+const UserList = styled.div`
+
 `
