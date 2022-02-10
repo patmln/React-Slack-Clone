@@ -24,6 +24,7 @@ export default() => {
       <Header/>
       <TabItems/>
       <ListItems 
+        path='channel'
         itemKey='name'
         list={channels}
         label='Channels' 
@@ -32,6 +33,7 @@ export default() => {
         addClick={() => setShowModal(true)}
       />
       <ListItems 
+        path='direct'
         itemKey='email'
         list={recentDMs}
         label='Direct messages' 

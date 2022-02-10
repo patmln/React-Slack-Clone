@@ -1,7 +1,7 @@
-import {useAuth} from '../../../contexts/AuthProvider'
-import SampleThread from '../../SampleThread'
+import SampleThread from '../../components/SampleThread'
+import {useAuth} from '../../contexts/AuthProvider'
+import ChatInput from '../../components/ChatInput'
 import {useEffect, useState} from 'react'
-import ChatInput from '../../ChatInput'
 import styled from 'styled-components'
 
 const baseUrl= 'https://static.wikia.nocookie.net/theoffice/images/'

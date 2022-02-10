@@ -11,7 +11,7 @@ export default() => {
 
   const signOut = () => {
     localStorage.removeItem('user')
-    navigate(-1)
+    location.reload()
   }
 
   return (

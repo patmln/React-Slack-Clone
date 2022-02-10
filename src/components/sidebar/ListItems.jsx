@@ -7,8 +7,8 @@ import {useState} from 'react'
 
 export default(props) => {
   const {
-    label, list,
     itemKey, itemImg,
+    label, list, path,
     addClick, addGeneral
   } = props
 
@@ -45,8 +45,8 @@ export default(props) => {
             # general
           </ListItem>
         }
-        {list && list.map((item, index) => (
-          <ListItem to='' key={index}>
+        {list && list.map((item, i) => (
+          <ListItem key={i} to={path+'/'+item.id}>
             {itemImg}
             <p>{item[itemKey]}</p>
           </ListItem> 

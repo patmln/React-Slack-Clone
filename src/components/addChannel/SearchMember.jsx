@@ -1,45 +1,36 @@
 import {useUsers} from '../../contexts/UsersProvider'
-import {useEffect, useState, useRef} from 'react'
 import styled from 'styled-components'
 import {CgClose} from 'react-icons/cg'
 import {NameInput, Image} from './style'
+import {useState} from 'react'
+import {
+  uniqueArray, findObjByKey
+} from '../../utils/helpers'
 
-export default({selected, setSelected}) => {
-  const inputRef = useRef()
+export default({setSelected}) => {
   const {users} = useUsers()
+  const [input, setInput]= useState('')
   const [suggestions, setSuggestions] = useState([])
 
-  const handleOnChange = () => {
-    const input = inputRef.current.value
-    let matches = []
-    if (input.length > 0) {
-      matches = users.filter(user => {
-        const regex = new RegExp(`${input}`,'gi')
-        return user.email.match(regex)
-      })
-    }
+  const handleOnChange = e => {
+    setInput(e.target.value)
+    let matches = input.length > 0
+      ? findObjByKey(users, 'email', input)
+        : []
     setSuggestions(matches)
-  }
-
-  const handleClick = id => {
-    setSelected(current => {
-      const newList = [...current, id]
-      const uniqueId = newList.filter(
-        (value, index, self) => self.indexOf(value) === index)
-      return uniqueId
-    })
   }
 
   return (
     <>
       <Input
-        ref={inputRef}
         onChange={handleOnChange}
         placeholder='somebody@example.com'
       />
       <Suggestions show={suggestions.length}>
         {suggestions.map((user, i) => (
-          <Item key={i} onClick={() => handleClick(user.id)}>
+          <Item key={i} onClick={
+            () => setSelected(current => uniqueArray([...current,user.id]))
+          }>
             <img src='./frog-boi.jpg'/>
             <span>{user.email}</span>
           </Item>

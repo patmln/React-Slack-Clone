@@ -1,5 +1,6 @@
 import {useUsers} from '../contexts/UsersProvider'
 import {useEffect, useState, useRef} from 'react'
+import {findObjByKey} from '../utils/helpers'
 import styled from 'styled-components'
 import {CgClose} from 'react-icons/cg'
 
@@ -13,13 +14,9 @@ export default() => {
 
   const handleOnChange = () => {
     const input = inputRef.current.value
-    let matches = []
-    if (input.length > 0) {
-      matches = users.filter(user => {
-        const regex = new RegExp(`${input}`,'gi')
-        return user.email.match(regex)
-      })
-    }
+    let matches = input.length > 0
+      ? findObjByKey(users, 'email', input)
+        : []
     setSuggestions(matches)
   }
 

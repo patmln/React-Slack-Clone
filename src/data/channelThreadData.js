@@ -40,53 +40,5 @@ export const channelThreadData = [
     name: "Toby Flenderson",
     date: "1:12 PM",
     message: "I don't want to talk about it."
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "1:13 PM",
-    message: "Good. We don't want to hear about it."
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "2:27 PM",
-    message: "I don't have a favorite employee"
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "2:28 PM",
-    message: "How could you guys even think that?"
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "2:29 PM",
-    message: "All of my employees are of totally eequal importance and worth"
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/6/67/Pam_Beesley.jpg' />,
-    name: "Pam Beesly",
-    date: "2:31 PM",
-    message: "It's Ryan isn't it"
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "2:33 PM",
-    message: "I can't help it."
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG' />,
-    name: "Michael Scott",
-    date: "2:35 PM",
-    message: "He has those love-me-please eyes and I'm weak."
-  },
-  {
-    icon: <img src='https://static.wikia.nocookie.net/theoffice/images/e/e6/Phyllis_Vance.jpg' />,
-    name: "Phyllis Vance",
-    date: "3:45 PM",
-    message: "Oscar's welcome back party start at 4 in the conference room."
   }
 ]

@@ -9,9 +9,10 @@ const MessageContext = createContext()
 export const useMessages = () => useContext(MessageContext)
 
 export default({children}) => {
-  const [recentDMs, setRecentDMs] = useState([])
-  const [conversations, setConversations] = useState([])
   const {auth} = useAuth()
+  const [recentDMs, setRecentDMs] = useState([])
+  const [receiversId, setReceiversId] = useState(null)
+  const [conversations, setConversations] = useState([])
 
   useEffect(() => {
     (async() => {
