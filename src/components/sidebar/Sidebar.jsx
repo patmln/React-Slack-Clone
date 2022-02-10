@@ -2,6 +2,7 @@ import {useChannels} from '../../contexts/ChannelsProvider'
 import {useMessages} from '../../contexts/MessagesProvider'
 import {useAuth} from '../../contexts/AuthProvider'
 import AddChannel from '../addChannel/AddChannel'
+import {useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {CgLock} from 'react-icons/cg'
@@ -12,6 +13,7 @@ import Huddle from './Huddle'
 
 export default() => {
   const {user} = useAuth()
+  const navigate = useNavigate()
   const {channels, setChannels} = useChannels()
   const {recentDMs, setRecentDMs} = useMessages()
   const [showModal, setShowModal] = useState(false)
@@ -27,13 +29,14 @@ export default() => {
         label='Channels' 
         addGeneral={true}
         itemImg={<CgLock/>}
-        setShowModal={setShowModal}
+        addClick={() => setShowModal(true)}
       />
       <ListItems 
         itemKey='email'
         list={recentDMs}
         label='Direct messages' 
         itemImg={<img src='./frog-boi.jpg'/>}
+        addClick={() => navigate('new')}
       />
       <Huddle active={channelOpen}/>
       <AddChannel 

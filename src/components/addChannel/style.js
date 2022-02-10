@@ -10,18 +10,19 @@ export const Modal = styled.div`
 
   button {
     float: right;
-    color: #d1d2d3;
+    color: #222529;
     cursor: pointer;
     font-size: 15px;
     margin-top: 15px;
     font-weight: bold;
     border-radius: 4px;
     padding: 10px 15px;
-    background: transparent;
-    border: 1px solid #8d8d8e;
+    background: #2EB67D;   
+    transition: all .1s ease;
     :hover {
-      color: #222529;
-      background: #D1D2D3;
+      color: #d1d2d3;
+      background: none;
+      outline: 1px #2EB67D solid;
     }
   }
 `
@@ -32,61 +33,4 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   svg { cursor: pointer; }
-`
-
-export const Body = styled.div`
-  padding-top: 20px;
-  p {
-    color: #b0b2b4;
-    font-size: 14px;
-  }
-  small {
-    color: gray;
-    font-size: 13px;
-  }
-`
-
-export const ModalLabel = styled.h4`
-  margin-bottom: 10px;
-  margin-top: 30px;
-  color: #d1d2d3;
-` 
-
-export const ModalName = styled.div`
-  display: flex;
-  align-items: center;
-  span {
-    color: gray;
-    height: 37px;
-    padding: 10px 10px;
-    border: 1px solid gray;
-    border-radius: 4px 0 0 4px;
-    border-right-style: none;
-  }
-` 
-
-export const NameInput = styled.input`
-  width: 100%;
-  color: #d1d2d3;
-  padding: 10px 10px;
-  background: transparent;
-  border: 1px solid #8d8d8e;
-  border-left-style: none;
-  border-radius: 0 4px 4px 0;
-  :focus { outline: none; }
-  :placeholder { color: #999b9d; }
-`
-
-export const Body2 = styled.div`
-  padding-top: 10px;
-  p {
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
-`
-
-export const ChannelName = styled.div`
-  color: #b0b2b4;
-  font-size: 14px;
-  padding-bottom: 30px;   
 `

@@ -7,22 +7,21 @@ import {useState} from 'react'
 
 export default(props) => {
   const {
-    addGeneral,
     label, list,
-    setShowModal,
-    itemKey, itemImg
+    itemKey, itemImg,
+    addClick, addGeneral
   } = props
 
   const [isRotate, setIsRotate] = useState(false)
-  const [showOptions, setShowOptions] = useState(false)
+  const [showOptions, isShowOptions] = useState(false)
 
   return (
     <div style={{marginTop: '10px'}}>
       <Tab 
         isRotate={isRotate} 
         showOptions={showOptions}
-        onMouseEnter={() => setShowOptions(true)}
-        onMouseLeave={() => setShowOptions(false)}
+        onMouseEnter={() => isShowOptions(true)}
+        onMouseLeave={() => isShowOptions(false)}
       >
         <div style={{display: 'flex'}}>
           <RiArrowRightSFill 
@@ -35,7 +34,7 @@ export default(props) => {
           <button>
             <FiMoreVertical size={18} color={'#b0b2b4'}/>
           </button>
-          <button onClick={() => setShowModal(true)}>
+          <button onClick={addClick}>
             <HiPlus size={20} color={'#b0b2b4'}/>
           </button>
         </div>

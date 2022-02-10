@@ -2,13 +2,11 @@ import {useUsers} from '../../contexts/UsersProvider'
 import {useEffect, useState, useRef} from 'react'
 import styled from 'styled-components'
 import {CgClose} from 'react-icons/cg'
+import {NameInput, Image} from './style'
 
-export default() => {
+export default({selected, setSelected}) => {
   const inputRef = useRef()
-  const {
-    users, getEmailById,
-    selectedId, setSelectedId
-  } = useUsers()
+  const {users} = useUsers()
   const [suggestions, setSuggestions] = useState([])
 
   const handleOnChange = () => {
@@ -24,26 +22,26 @@ export default() => {
   }
 
   const handleClick = id => {
-    setSelectedId(id)
-    inputRef.current.value = ''
-    inputRef.current.placeholder = ''
+    setSelected(current => {
+      const newList = [...current, id]
+      const uniqueId = newList.filter(
+        (value, index, self) => self.indexOf(value) === index)
+      return uniqueId
+    })
   }
 
   return (
     <>
-      <Search>
-        <label>To:</label>
-        <input
-          ref={inputRef}
-          onChange={handleOnChange}
-          placeholder='somebody@example.com'
-        />
-      </Search>
+      <Input
+        ref={inputRef}
+        onChange={handleOnChange}
+        placeholder='somebody@example.com'
+      />
       <Suggestions show={suggestions.length}>
         {suggestions.map((user, i) => (
           <Item key={i} onClick={() => handleClick(user.id)}>
             <img src='./frog-boi.jpg'/>
-            <p>{user.email}</p>
+            <span>{user.email}</span>
           </Item>
         ))}
       </Suggestions>
@@ -51,55 +49,21 @@ export default() => {
   )  
 }
 
-const Search = styled.div`
+const Input = styled.input`
   width: 100%;
-  height: 49px;
-  display: flex;
-  padding-left: 20px;
-  background: #1A1D21;
-  padding-right: 20px;
-  align-items: center;
-  outline: 1px solid #35373B;
-  justify-content: space-between;
-  label { margin-right: 8px; }
-  input {
-    height: 100%;
-    width: 100%;
-    color:#a4a4a6;
-    font-size: 14px;
-    margin-left: 8px;
-    background: transparent;
-    :focus { outline: 0; }
-  }
-`
-
-const Selected = styled.span`
-  height: 26px;
-  display: flex;
-  cursor: pointer;
+  color: #d1d2d3;
+  padding: 10px 10px;
   border-radius: 4px;
-  align-items: center;
-  background: #1a2a34;
-  p { font-weight: bold; }
-  svg { 
-    margin: 0 8px; 
-    :hover { background: #23333B; }
-  }
-`
-
-const Image = styled.img`
-  height: 100%;
-  overflow: hidden;
-  margin-right: 8px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  background: #1A1D21;
+  border: 1px solid #8d8d8e;
+  :focus { outline: none; }
+  :placeholder { color: #999b9d; }
 `
 
 const Suggestions = styled.div`
   width: 100%;
   font-size: 15px;
   max-height: 240px;
-  margin-top: -5px;
   overflow-y: scroll;
   border-radius: 8px;
   background: #222529;
@@ -109,11 +73,12 @@ const Suggestions = styled.div`
 `
 
 const Item = styled.div`
+  height: 30px;
   display: flex;
   cursor: pointer;
   align-items: center;
   padding: .5em 0 .5em 20px;
-  p { font-weight: bold; }
+  span { font-weight: bold; }
   :hover { background: #1264A3; }
   img {
     height: 20px;

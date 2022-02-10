@@ -11,23 +11,18 @@ import Channel from './clientRoutes/Channel'
 import Direct from './clientRoutes/Direct'
 import Chat from './clientRoutes/Chat'
 
-export default() => {
-  const {user} = useAuth()
-  const mainPage = user ? <Client/> : <Login/>
-
-  return useRoutes([
-    { path: '/', element: mainPage, },
-    { path: 'client', element: mainPage,
-      children: [
-        { path: '', element: <General/> },
-        { path: 'chat', element: <Chat/> },
-        { path: 'direct', element: <Direct/> },
-        { path: 'new', element: <NewMessage/> },
-        { path: 'channel', element: <Channel/> }
-      ]
-    },
-    { path: 'signup', element: <SignUp/>},
-    { path: '*', element: <NotFound/>},
-  ])
-}
+export default() => useRoutes([
+  { path: '/', element: <Login/> },
+  { path: 'client', element: <Client/>,
+    children: [
+      { path: '', element: <General/> },
+      { path: 'chat', element: <Chat/> },
+      { path: 'direct', element: <Direct/> },
+      { path: 'new', element: <NewMessage/> },
+      { path: 'channel', element: <Channel/> }
+    ]
+  },
+  { path: 'signup', element: <SignUp/>},
+  { path: '*', element: <NotFound/>},
+])
 

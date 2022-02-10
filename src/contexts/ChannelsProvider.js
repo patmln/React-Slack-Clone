@@ -9,8 +9,8 @@ const ChannelsContext = createContext()
 export const useChannels = () => useContext(ChannelsContext)
 
 export default({children}) => {
-  const {user: {auth}} = useAuth()
   const [channels, setChannels] = useState([])
+  const {auth} = useAuth()
 
   useEffect(() => {
     (async() => {

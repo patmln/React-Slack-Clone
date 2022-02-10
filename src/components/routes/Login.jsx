@@ -1,13 +1,14 @@
 import {useAuth} from '../../contexts/AuthProvider'
+import {Link, useNavigate} from 'react-router-dom'
 import {inputData} from '../../data/authInputData'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import Toast from '../Toast'
 import Form from '../Form'
 
 export default() => {
-  const {setUser, login} = useAuth()
+  const {login} = useAuth()
+  const navigate = useNavigate()
   const [toast, setToast] = useState({
     show: false, 
     type:'fail', 
@@ -25,12 +26,11 @@ export default() => {
         type: 'fail',
         message: 'Fields cannot be empty',
       })
-    } else {
-      const user = await login({'email': email, 'password': password})
-      if (user) {
-        const userToken = btoa(JSON.stringify(user))
-        localStorage.user = userToken
-        setUser(atob(userToken))
+    } 
+    else {
+      const res = await login({'email': email, 'password': password})
+      if (res.status === 200) {
+        navigate('client')        
       }
     }
   }

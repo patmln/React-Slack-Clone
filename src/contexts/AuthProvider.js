@@ -8,13 +8,9 @@ const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
 
 export default({children}) => {
-  const [user, setUser] = useState(null)
-
-  useLayoutEffect(() => {
-    const decodedToken = atob(localStorage.user || '')
-    const storedUser = decodedToken && JSON.parse(decodedToken)
-    setUser(storedUser)
-  }, [])
+  const decodedToken = atob(localStorage.user || '')
+  const jsonToken = decodedToken && JSON.parse(decodedToken)
+  const auth = jsonToken.auth
 
   const signUp = async(body) => {
     try { await axiosAPI.post('auth', body) } 
@@ -23,27 +19,22 @@ export default({children}) => {
 
   const login = async(body) => {
     try {
-      const {
-        data: {data}, headers: auth
-      } = await axiosAPI.post('auth/sign_in', body)
-      return {data, auth}
+      const res = await axiosAPI.post('auth/sign_in', body)
+      const { data: {data}, headers: auth } = res
+
+      const userToken = btoa(JSON.stringify({data, auth}))
+      localStorage.user = userToken
+
+      return res
     } catch(e) {
       console.error(e)
       return null
     }
   }
 
-  const signOut = () => {
-    localStorage.removeItem('user')
-    setUser(null)
-  }
 
   return (
-    <AuthContext.Provider value={{ 
-      user, setUser, 
-      signUp, login,
-      signOut }}
-    >
+    <AuthContext.Provider value={{auth, login, signUp}}>
       {children}
     </AuthContext.Provider>
   )
