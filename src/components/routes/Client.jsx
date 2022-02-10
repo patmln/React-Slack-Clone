@@ -1,11 +1,10 @@
-import MessagesProvider from '../../../contexts/MessagesProvider'
-import ChannelsProvider from '../../../contexts/ChannelsProvider'
-import UsersProvider from '../../../contexts/UsersProvider'
-import Sidebar from '../../stateful/sidebar/Sidebar'
+import MessagesProvider from '../../contexts/MessagesProvider'
+import ChannelsProvider from '../../contexts/ChannelsProvider'
+import UsersProvider from '../../contexts/UsersProvider'
+import Sidebar from '../sidebar/Sidebar'
+import {Outlet} from 'react-router-dom'
 import styled from 'styled-components'
-import NewMessage from './NewMessage'
-import Nav from '../../stateless/Nav'
-import Chat from './Chat'
+import Nav from '../Nav'
 
 export default() => (
   <ClientPage>
@@ -13,10 +12,9 @@ export default() => (
     <ChannelsProvider>
       <MessagesProvider>
         <Main>
-          <Sidebar/>
           <UsersProvider>
-            <NewMessage/>
-            {/* <Chat/> */}
+            <Sidebar/>
+            <Outlet/>
           </UsersProvider>
         </Main>
       </MessagesProvider>

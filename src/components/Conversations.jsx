@@ -1,4 +1,4 @@
-import {useMessages} from '../../contexts/MessagesProvider'
+import {useMessages} from '../contexts/MessagesProvider'
 import styled from 'styled-components'
 
 export default() => {

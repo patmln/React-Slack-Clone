@@ -16,7 +16,6 @@ export default(props) => {
   const [isRotate, setIsRotate] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
 
-
   return (
     <div style={{marginTop: '10px'}}>
       <Tab 
@@ -74,9 +73,9 @@ const ListItem = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   :hover { background: #313843; }
-  ${({ active }) => active && `
+  [class*="active"] {
     color: #FFF;
-    background: #537AA6;`
+    background: #537AA6;
   }
   img { height: 20px; }
   p { margin-left: 8px; } 

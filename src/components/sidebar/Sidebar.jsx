@@ -1,18 +1,12 @@
-import {
-  useChannels
-} from '../../../contexts/ChannelsProvider'
-import {
-  useMessages
-} from '../../../contexts/MessagesProvider'
+import {useChannels} from '../../contexts/ChannelsProvider'
+import {useMessages} from '../../contexts/MessagesProvider'
+import {useAuth} from '../../contexts/AuthProvider'
+import AddChannel from '../addChannel/AddChannel'
 import {useState, useEffect} from 'react'
-import {
-  useAuth
-} from '../../../contexts/AuthProvider'
 import styled from 'styled-components'
 import {CgLock} from 'react-icons/cg'
 import ListItems from './ListItems'
 import TabItems from './TabItems'
-import Modal from '../../Modal'
 import Header from './Header'
 import Huddle from './Huddle'
 
@@ -42,7 +36,10 @@ export default() => {
         itemImg={<img src='./frog-boi.jpg'/>}
       />
       <Huddle active={channelOpen}/>
-      <Modal onClose={() => setShowModal(false)} show={showModal}/>
+      <AddChannel 
+        setShow={setShowModal}
+        show={showModal}
+      />
     </Sidebar>
   )
 }

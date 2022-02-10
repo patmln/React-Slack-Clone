@@ -1,4 +1,4 @@
-import {useAuth} from '../../contexts/AuthProvider'
+import {useAuth} from '../contexts/AuthProvider'
 import {MdHelpOutline} from 'react-icons/md'
 import {CgSearch} from 'react-icons/cg'
 import styled from 'styled-components'

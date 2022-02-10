@@ -2,9 +2,9 @@ import {useAuth} from '../../contexts/AuthProvider'
 import {inputData} from '../../data/authInputData'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import Toast from '../stateful/Toast'
-import Form from '../stateless/Form'
 import {useState} from 'react'
+import Toast from '../Toast'
+import Form from '../Form'
 
 export default() => {
   const {setUser, login} = useAuth()
