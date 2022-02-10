@@ -1,15 +1,20 @@
-import {sendMessage} from '../../utils/api/messages'
+import {useMessages} from '../contexts/MessagesProvider'
+import {useUsers} from '../contexts/UsersProvider'
+import {useAuth} from '../contexts/AuthProvider'
 import {HiPaperAirplane} from 'react-icons/hi'
 import styled from 'styled-components'
 import {useRef} from 'react'
 
-export default({auth, selected}) => {
+export default() => {
+  const {user} = useAuth()
   const inputRef = useRef(null)
+  const {selectedId} = useUsers()
+  const {sendMessage} = useMessages()
 
   const handleClick = () => {
-    const input = inputRef.current.value
-    sendMessage(auth, {
-      'receiver_id': selected,
+    let input = inputRef.current.value
+    sendMessage({
+      'receiver_id': selectedId,
       'receiver_class': 'User',
       'body': input
     })

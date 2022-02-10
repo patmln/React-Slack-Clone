@@ -1,30 +1,21 @@
-import SearchUser from '../../stateful/searchUser/SearchUser'
-import ChatInput from '../../stateful/ChatInput'
+import SearchUser from '../../SearchUser'
+import ChatInput from '../../ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-export default({auth}) => {
-  const [selected, setSelected] = useState(null)
-
+export default() => {
   return (
     <Container>
       <Heading>New message</Heading>
-      <SearchUser 
-        auth={auth}
-        selected={selected}
-        setSelected={setSelected}
-      />
-      <ChatInput 
-        auth={auth}
-        selected={selected}
-      />
+      <SearchUser/>
+      <ChatInput/>
     </Container>
   )
 }
 
 const Container = styled.div`
   display: flex;
-  color: #d1d2d3;
+  color: #D1D2D3;
   align-items: center;
   flex-direction: column;
 `

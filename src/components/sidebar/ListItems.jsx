@@ -46,7 +46,7 @@ export default(props) => {
             # general
           </ListItem>
         }
-        {list.map((item, index) => (
+        {list && list.map((item, index) => (
           <ListItem to='' key={index}>
             {itemImg}
             <p>{item[itemKey]}</p>
@@ -73,9 +73,9 @@ const ListItem = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   :hover { background: #313843; }
-  ${({ active }) => active && `
+  [class*="active"] {
     color: #FFF;
-    background: #537AA6;`
+    background: #537AA6;
   }
   img { height: 20px; }
   p { margin-left: 8px; } 
