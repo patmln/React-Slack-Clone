@@ -1,35 +1,36 @@
+import {useMessages} from '../contexts/MessagesProvider'
 import styled from 'styled-components'
-import { channelThreadData } from './sampleData'
 
-const SampleThread = () => {
-    return(
-      <Message>
-        {
-          channelThreadData.map(item => (
-            <><UserAvatar>
-              {item.icon}
+export default() => {
+  const {conversations} = useMessages()
+
+  return(
+    <>{
+      conversations && conversations.map(
+        ({email, created_at, body}, index) => (
+          <Message key={index}>
+            <UserAvatar>
+              <img src='./frog-boi.jpg'/>
             </UserAvatar>
             <MessageContent>
               <Name>
-              {item.name}
-                <Date>{item.date}</Date>
+                {email}
+                <Date>
+                  {created_at}
+                </Date>
               </Name>
-              <span>{item.message}</span>
-            </MessageContent></>
-          ))
-        }
-      </Message>
-    )
+              <p>{body}</p>
+            </MessageContent>
+          </Message>
+        ))
+    }</>
+  )
 }
 
-export default SampleThread
-
-// STYLES
 const Message = styled.div`
-  display: grid;
+  display: flex;
   padding: 8px 20px;
-  grid-template-columns: 3.5% auto;
-  row-gap: 10px;
+  align-items: center;
 `
 
 const UserAvatar = styled.div`
@@ -44,7 +45,6 @@ const UserAvatar = styled.div`
 const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
-  
 `
 
 const Name = styled.span`

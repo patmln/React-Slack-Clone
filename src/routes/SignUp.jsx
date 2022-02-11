@@ -1,20 +1,33 @@
-import Form from '../components/stateless/Form'
+import {useAuth} from '../contexts/AuthProvider'
 import {inputData} from '../data/authInputData'
-import {register} from '../utils/api/user'
+import Toast from '../components/Toast'
 import styled from 'styled-components'
+import Form from '../components/Form'
+import {Link} from 'react-router-dom'
 import {useState} from 'react'
 
 export default() => {
+  const {signup} = useAuth()
+
+  const [toast, setToast] = useState({
+    show: false, 
+    type:'fail', 
+    message: '', 
+  })
+
   const handleSubmit = e => {
-    // if(!email || !password || !confirmPassword) return
-    
-    // const newUser = {
-    //   'email': email,
-    //   'password': password,
-    //   'password_confirmation': confirmPassword
-    // }
-    
-    // register(newUser) 
+    e.preventDefault()
+    const email = e.target.email.value
+    const password = e.target.password.value
+    const confirmPassword = e.target.confirmPassword.value
+
+    if(!email || !password || !confirmPassword) return
+
+    signup({
+      'email': email,
+      'password': password,
+      'password_confirmation': confirmPassword
+    })
   }
 
   return(
@@ -30,6 +43,14 @@ export default() => {
           inputData={inputData}
           handleSubmit={handleSubmit}
         />
+        <Link to='/'>
+          Create an account
+        </Link>
+        <Toast 
+          type={toast.type} 
+          show={toast.show} 
+          message={toast.message}
+        />
       </Content>
     </SignUpPage>
   )
@@ -41,7 +62,7 @@ const SignUpPage = styled.div`
   display: flex;
   color: whitesmoke;
   align-items: center;
-  background: #19191b;
+  background: #19191B;
   justify-content: center;
 `
 
@@ -63,5 +84,11 @@ const Content = styled.div`
   p {
     font-size: 16px;
     padding-bottom: 20px;
+  }
+  a {
+    margin-top: 25px;
+    color: whitesmoke;
+    text-decoration: none;
+    :hover { text-decoration: underline; }
   }
 `

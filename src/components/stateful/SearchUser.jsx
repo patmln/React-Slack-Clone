@@ -1,50 +1,60 @@
-import {getAllUsers} from '../../utils/api/user'
-import {useEffect, useState} from 'react'
+import {useUsers} from '../contexts/UsersProvider'
+import {useEffect, useState, useRef} from 'react'
+import {findObjByKey} from '../utils/helpers'
 import styled from 'styled-components'
+import {CgClose} from 'react-icons/cg'
 
-export default({auth}) => {
-  const [search, setSearch] = useState('')
-  const [userList, setUserList] = useState([])
+export default() => {
+  const inputRef = useRef()
+  const {
+    users, getEmailById,
+    selectedId, setSelectedId
+  } = useUsers()
   const [suggestions, setSuggestions] = useState([])
 
-  useEffect(() => {
-    (async()=> {
-      const res = await getAllUsers(auth)
-      setUserList(res.data)
-    })()
-  }, [])
-
-  const handleOnChange = input => {
-    let matches = []
-    if (input.length > 0) {
-      matches = userList.filter(user => {
-        const regex = new RegExp(`${input}`,'gi')
-        return user.email.match(regex)
-      })
-    }
+  const handleOnChange = () => {
+    const input = inputRef.current.value
+    let matches = input.length > 0
+      ? findObjByKey(users, 'email', input)
+        : []
     setSuggestions(matches)
-    setSearch(input)
   }
 
-  return (<>
-    <Search>
-      <label>To:</label>
-      <input 
-        onChange={e => handleOnChange(e.target.value)}
-        placeholder='#a-channel, @somebody, or somebody@example.com'
-      />
-    </Search>
-    <SearchResult hide={!suggestions.length}>
-    {suggestions.map(({email}, index) => {
-      return (
-        <ResultItem key={index}>
-          <img src='./frog-boi.jpg' alt=''/>
-          <strong>{email}</strong>
-        </ResultItem>
-      )
-    })}
-    </SearchResult>
-  </>)  
+  const handleClick = id => {
+    setSelectedId(id)
+    inputRef.current.value = ''
+    inputRef.current.placeholder = ''
+  }
+
+  return (
+    <>
+      <Search>
+        <label>To:</label>
+        {selectedId && 
+          <Selected>
+            <Image src='./frog-boi.jpg'/>
+            <p>{getEmailById(selectedId)}</p>
+            <CgClose size={20} onClick={() => setSelectedId(null)}/>
+          </Selected>
+        } 
+        <input
+          ref={inputRef}
+          onChange={handleOnChange}
+          placeholder='#a-channel, @somebody, or somebody@example.com'
+        />
+      </Search>
+      <Suggestions show={suggestions.length}>
+        {suggestions.map((user, i) => (
+          <Item key={i} onClick={
+            () => handleClick(user.id)
+          }>
+            <img src='./frog-boi.jpg'/>
+            <p>{user.email}</p>
+          </Item>
+        ))}
+      </Suggestions>
+    </>
+  )  
 }
 
 const Search = styled.div`
@@ -57,7 +67,7 @@ const Search = styled.div`
   align-items: center;
   outline: 1px solid #35373B;
   justify-content: space-between;
-
+  label { margin-right: 8px; }
   input {
     height: 100%;
     width: 100%;
@@ -65,29 +75,52 @@ const Search = styled.div`
     font-size: 14px;
     margin-left: 8px;
     background: transparent;
-    &:focus { outline: 0; }
+    :focus { outline: 0; }
   }
 `
 
-const SearchResult = styled.div`
+const Selected = styled.span`
+  height: 26px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 4px;
+  align-items: center;
+  background: #1a2a34;
+  p { font-weight: bold; }
+  svg { 
+    margin: 0 8px; 
+    :hover { background: #23333B; }
+  }
+`
+
+const Image = styled.img`
+  height: 100%;
+  overflow: hidden;
+  margin-right: 8px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+`
+
+const Suggestions = styled.div`
   width: 98%;
   font-size: 15px;
-  max-height: 240px;
+  min-height: 240px;
   margin-top: -10px;
   overflow-y: scroll;
   border-radius: 8px;
   background: #222529;
   padding: 1em 0 1em 0;
   border: 1px solid #323337;
-  display: ${(props) => props.hide && 'none'}
+  display: ${({ show }) => !show && 'none'};
 `
 
-const ResultItem = styled.div`
+const Item = styled.div`
   display: flex;
   cursor: pointer;
   align-items: center;
   padding: .5em 0 .5em 20px;
-  &:hover { background: #1264A3; }
+  p { font-weight: bold; }
+  :hover { background: #1264A3; }
   img {
     height: 20px;
     margin-right: 8px;

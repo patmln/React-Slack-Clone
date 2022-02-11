@@ -1,16 +1,13 @@
+import {HiChevronDown, HiOutlinePencilAlt} from 'react-icons/hi'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {
-  HiChevronDown,
-  HiOutlinePencilAlt
-} from 'react-icons/hi'
 
 export default() => (
   <Header>
     <p>Avion School</p>
     <HiChevronDown/>
-    <NewMessage to='/newMessage'>
-      <HiOutlinePencilAlt size={18}/>
+    <NewMessage to='new'>
+      <HiOutlinePencilAlt size={18} color={'black'}/>
     </NewMessage> 
   </Header>
 )
