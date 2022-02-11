@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import {useState, useRef} from 'react'
 import NameModal from './NameModal'
 
-
 export default({show, setShow})=> {
   const [openNext, isOpenNext] = useState(false)
-  const nameRef = useRef(null)
+  const [channelName, setChannelName] = useState('')
 
   const onClose = () => {
     setShow(false)
@@ -16,16 +15,17 @@ export default({show, setShow})=> {
   return (<>
     {show &&
       <Overlay onClick={onClose}>
-        <NameModal
-          onClose={onClose} 
-          nameRef={nameRef}
+        <NameModal 
+          onClose={onClose}
           openNext={openNext} 
           isOpenNext={isOpenNext} 
+          channelName={channelName}
+          setChannelName={setChannelName}
         />
         <MembersModal 
-          onClose={onClose}
-          nameRef={nameRef} 
+          onClose={onClose} 
           openNext={openNext}
+          channelName={channelName}
         />
       </Overlay>
     }

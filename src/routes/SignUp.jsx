@@ -1,11 +1,20 @@
-import {useAuth} from '../../contexts/AuthProvider'
-import {inputData} from '../../data/authInputData'
+import {useAuth} from '../contexts/AuthProvider'
+import {inputData} from '../data/authInputData'
+import Toast from '../components/Toast'
 import styled from 'styled-components'
+import Form from '../components/Form'
+import {Link} from 'react-router-dom'
 import {useState} from 'react'
-import Form from '../Form'
 
 export default() => {
-  const {signUp} = useAuth()
+  const {signup} = useAuth()
+
+  const [toast, setToast] = useState({
+    show: false, 
+    type:'fail', 
+    message: '', 
+  })
+
   const handleSubmit = e => {
     e.preventDefault()
     const email = e.target.email.value
@@ -14,7 +23,7 @@ export default() => {
 
     if(!email || !password || !confirmPassword) return
 
-    signUp({
+    signup({
       'email': email,
       'password': password,
       'password_confirmation': confirmPassword
@@ -33,6 +42,14 @@ export default() => {
           btnLabel='Sign Up'
           inputData={inputData}
           handleSubmit={handleSubmit}
+        />
+        <Link to='/'>
+          Create an account
+        </Link>
+        <Toast 
+          type={toast.type} 
+          show={toast.show} 
+          message={toast.message}
         />
       </Content>
     </SignUpPage>
@@ -67,5 +84,11 @@ const Content = styled.div`
   p {
     font-size: 16px;
     padding-bottom: 20px;
+  }
+  a {
+    margin-top: 25px;
+    color: whitesmoke;
+    text-decoration: none;
+    :hover { text-decoration: underline; }
   }
 `

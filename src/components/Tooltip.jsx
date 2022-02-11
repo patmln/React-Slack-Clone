@@ -1,5 +1,5 @@
+import styled, {keyframes} from 'styled-components'
 import {useState, useRef} from 'react'
-import styled from 'styled-components'
 
 export default() => {
   const [isHovered, setIsHovered] = useState(false)

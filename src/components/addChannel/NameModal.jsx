@@ -1,24 +1,19 @@
 import {CgClose} from 'react-icons/cg'
-import {useState, useRef} from 'react'
-import {
-  Modal, Header,
-  Body, ModalLabel,
-  ModalName, NameInput
-} from './style'
+import styled from 'styled-components'
+import {Modal, Header} from './style'
+import {useState} from 'react'
 
 export default(props) => {
   const {
-    onClose, nameRef,
-    openNext, isOpenNext
+    onClose, 
+    openNext, isOpenNext,
+    channelName, setChannelName
   } = props
 
   const handleClick = () => { 
-    const name = nameRef.current.value
-    if (!name || name.length < 3 || name.length > 15) {
+    if (!channelName || channelName.length < 3 || channelName.length > 15) {
       alert('Name should be within 3-15 characters long')  
-    } else {
-      isOpenNext(true)
-    }
+    } else isOpenNext(true)
   }
 
   return (<>
@@ -36,10 +31,59 @@ export default(props) => {
           <ModalLabel>Name</ModalLabel>
           <ModalName>
             <span>#</span>
-            <NameInput ref={nameRef} placeholder='e.g. plan-budget'/>    
+            <NameInput 
+              placeholder='e.g. plan-budget'
+              onChange={e => setChannelName(e.target.value)}
+            />    
           </ModalName>
         </Body>
         <button onClick={handleClick}>Next</button>
       </Modal>
     }</>)
 }
+
+export const Body = styled.div`
+  padding-top: 20px;
+  p {
+    color: #b0b2b4;
+    font-size: 14px;
+  }
+  small {
+    color: gray;
+    font-size: 13px;
+  }
+`
+
+export const ModalLabel = styled.h4`
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #d1d2d3;
+` 
+
+const ModalName = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    width: 8px;
+    color: gray;
+    height: 38px;
+    font-size: 14px;
+    padding: 10px 10px;
+    background: #1A1D21;
+    border: 1px solid gray;
+    border-radius: 4px 0 0 4px;
+    border-right-style: none;
+  }
+` 
+
+const NameInput = styled.input`
+  width: 100%;
+  color: #d1d2d3;
+  padding: 10px 10px;
+  background: #1A1D21;
+  border: 1px solid #8d8d8e;
+  border-radius: 0 4px 4px 0;
+  border-left-style: none;
+  :focus { outline: none; }
+  :placeholder { color: #999b9d; }
+`

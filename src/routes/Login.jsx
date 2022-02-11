@@ -1,20 +1,22 @@
-import {useAuth} from '../../contexts/AuthProvider'
-import {inputData} from '../../data/authInputData'
+import {useAuth} from '../contexts/AuthProvider'
+import {Link, Navigate} from 'react-router-dom'
+import {inputData} from '../data/authInputData'
+import Toast from '../components/Toast'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import Form from '../components/Form'
+import ClientPage from './Client'
 import {useState} from 'react'
-import Toast from '../Toast'
-import Form from '../Form'
 
 export default() => {
-  const {setUser, login} = useAuth()
+  const {login, auth} = useAuth()
+
   const [toast, setToast] = useState({
     show: false, 
     type:'fail', 
     message: '', 
   })
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     const email = e.target.email.value
     const password = e.target.password.value
@@ -25,20 +27,25 @@ export default() => {
         type: 'fail',
         message: 'Fields cannot be empty',
       })
-    } else {
-      const user = await login({'email': email, 'password': password})
-      if (user) {
-        const userToken = btoa(JSON.stringify(user))
-        localStorage.user = userToken
-        setUser(atob(userToken))
-      }
+      setTimeout(() => setToast({show: false}), 3000)
+    } 
+    else {
+      login({'email': email, 'password': password})
+      .then(() => location.reload())
+      .catch(e => {
+        setToast({ 
+          type: 'fail',
+          message: 'User does not exist',
+        })
+        setTimeout(() => setToast({show: false}), 3000)
+      })
     }
   }
 
   const loginInputData = [...inputData] 
   loginInputData.pop()
 
-  return (
+  return (!auth ?
     <LoginPage>
       <Content>
         <img src='./slack-logo.svg'/>
@@ -49,7 +56,7 @@ export default() => {
           inputData={loginInputData}
           handleSubmit={handleSubmit}
         />
-        <Link to='../signup'>
+        <Link to='signup'>
           Create an account
         </Link>
         <Toast 
@@ -59,6 +66,7 @@ export default() => {
         />
       </Content>
     </LoginPage>
+    : <Navigate to='/client'/>
   )
 }
 

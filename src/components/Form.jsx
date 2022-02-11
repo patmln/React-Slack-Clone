@@ -1,18 +1,25 @@
 import styled from 'styled-components'
 
-export default({inputData, handleSubmit, btnLabel}) => (
-  <Form onSubmit={handleSubmit}>
-    {inputData.map((input, index) => (
-      <input 
-        key={index}
-        id={input.id}
-        type={input.type}
-        placeholder={input.placeholder}
-      />
-    ))}
-    <button>{btnLabel}</button> 
-  </Form>
-)
+export default(props) => {
+  const {
+    inputData, btnLabel,
+    handleSubmit, action
+  } = props
+
+  return (
+    <Form onSubmit={handleSubmit} action={action}>
+      {inputData.map((input, index) => (
+        <input 
+          key={index}
+          id={input.id}
+          type={input.type}
+          placeholder={input.placeholder}
+        />
+      ))}
+      <button>{btnLabel}</button> 
+    </Form>
+  )
+}
 
 const Form = styled.form`
   width: 100%;

@@ -1,5 +1,4 @@
-import SearchUser from '../../SearchUser'
-import ChatInput from '../../ChatInput'
+import ChatInput from '../../components/ChatInput'
 import styled from 'styled-components'
 import {useState} from 'react'
 
@@ -7,7 +6,6 @@ export default() => {
   return (
     <Container>
       <Heading>New message</Heading>
-      <SearchUser/>
       <ChatInput/>
     </Container>
   )

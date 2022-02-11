@@ -1,9 +1,9 @@
-import {useMessages} from '../../../contexts/MessagesProvider'
-import {useAuth} from '../../../contexts/AuthProvider'
-import Conversations from '../../Conversations'
+import {useMessages} from '../../contexts/MessagesProvider'
+import Conversations from '../../components/Conversations'
+import {useAuth} from '../../contexts/AuthProvider'
+import ChatInput from '../../components/ChatInput'
 import {useEffect, useState} from 'react'
 import {BiLockAlt} from 'react-icons/bi'
-import ChatInput from '../../ChatInput'
 import styled from 'styled-components'
 
 export default() => {

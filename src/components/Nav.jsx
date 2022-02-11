@@ -1,4 +1,5 @@
 import {useAuth} from '../contexts/AuthProvider'
+import {useNavigate} from 'react-router-dom'
 import {MdHelpOutline} from 'react-icons/md'
 import {CgSearch} from 'react-icons/cg'
 import styled from 'styled-components'
@@ -6,7 +7,12 @@ import {BiTime} from 'react-icons/bi'
 import {useState} from 'react'
 
 export default() => {
-  const {signOut} = useAuth()
+  const navigate = useNavigate()
+
+  const signOut = () => {
+    localStorage.removeItem('user')
+    location.reload()
+  }
 
   return (
     <Nav>

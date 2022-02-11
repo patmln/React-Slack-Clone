@@ -9,14 +9,14 @@ const UserContext = createContext()
 export const useUsers = () => useContext(UserContext)
 
 export default({children}) => {
-  const {user} = useAuth()
+  const {auth} = useAuth()
   const [users, setUsers] = useState([])
   const [selectedId, setSelectedId] = useState(null)
 
   useEffect(() => {
-    (async(auth) => {
+    (async() => {
       try {
-        const {data: {data}} = await axiosAPI('users', {headers: user.auth})
+        const {data:{data}}= await axiosAPI('users', {headers: auth})
         setUsers(data)
       } catch(err) {
         console.error(err)

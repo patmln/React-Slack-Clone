@@ -1,5 +1,6 @@
 import {useUsers} from '../contexts/UsersProvider'
 import {useEffect, useState, useRef} from 'react'
+import {findObjByKey} from '../utils/helpers'
 import styled from 'styled-components'
 import {CgClose} from 'react-icons/cg'
 
@@ -13,13 +14,9 @@ export default() => {
 
   const handleOnChange = () => {
     const input = inputRef.current.value
-    let matches = []
-    if (input.length > 0) {
-      matches = users.filter(user => {
-        const regex = new RegExp(`${input}`,'gi')
-        return user.email.match(regex)
-      })
-    }
+    let matches = input.length > 0
+      ? findObjByKey(users, 'email', input)
+        : []
     setSuggestions(matches)
   }
 
@@ -37,9 +34,7 @@ export default() => {
           <Selected>
             <Image src='./frog-boi.jpg'/>
             <p>{getEmailById(selectedId)}</p>
-            <CgClose size={20} onClick={
-              () => setSelectedId(null)
-            }/>
+            <CgClose size={20} onClick={() => setSelectedId(null)}/>
           </Selected>
         } 
         <input
@@ -109,7 +104,7 @@ const Image = styled.img`
 const Suggestions = styled.div`
   width: 98%;
   font-size: 15px;
-  max-height: 240px;
+  min-height: 240px;
   margin-top: -10px;
   overflow-y: scroll;
   border-radius: 8px;

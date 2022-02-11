@@ -9,15 +9,15 @@ const MessageContext = createContext()
 export const useMessages = () => useContext(MessageContext)
 
 export default({children}) => {
-  const {user} = useAuth()
+  const {auth} = useAuth()
   const [recentDMs, setRecentDMs] = useState([])
+  const [receiversId, setReceiversId] = useState(null)
   const [conversations, setConversations] = useState([])
 
   useEffect(() => {
     (async() => {
       try {
-        const {data: {data}} = await axiosAPI(
-          'users/recent', {headers: user.auth})
+        const {data: {data}} = await axiosAPI('users/recent', {headers: auth})
         const uniqueByEmail = data.filter(
           (dm, index, self) =>
             index === self.findIndex(t =>  t.email === dm.email)
@@ -31,8 +31,7 @@ export default({children}) => {
     try {
       const url = 'messages?receiver_class=User&receiver_id='
       const {data} = await axiosAPI(
-        url+receiversId,
-        {headers: user.auth}
+        url+receiversId, {headers: auth}
       )
       return data
     } catch(e) {
@@ -43,7 +42,7 @@ export default({children}) => {
 
   const sendMessage = async(body) => {
     try {
-      await axiosAPI.post('messages', body, {headers: user.auth})
+      await axiosAPI.post('messages', body, {headers: auth})
     } catch(e) { console.error(e) }
   }
 
