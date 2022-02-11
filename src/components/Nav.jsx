@@ -5,14 +5,17 @@ import {CgSearch} from 'react-icons/cg'
 import styled from 'styled-components'
 import {BiTime} from 'react-icons/bi'
 import {useState} from 'react'
+import { DropdownMenu } from './DropdownMenu'
 
 export default() => {
   const navigate = useNavigate()
 
-  const signOut = () => {
-    localStorage.removeItem('user')
-    location.reload()
-  }
+  // const signOut = () => {
+  //   localStorage.removeItem('user')
+  //   location.reload()
+  // }
+
+  const [open, setOpen] = useState()
 
   return (
     <Nav>
@@ -25,9 +28,10 @@ export default() => {
       </Main>
       <UserContent>
         <MdHelpOutline size={22}/>
-        <Image onClick={signOut}>
-          <img src='./frog-boi.jpg'/>
-        </Image>
+        <Image >
+          <a onClick={() => setOpen(!open)}><img src='./frog-boi.jpg'/></a>
+          {open && <DropdownMenu />}
+        </Image>  
       </UserContent>
     </Nav>
   )
