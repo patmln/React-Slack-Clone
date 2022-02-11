@@ -6,8 +6,11 @@ import {
   ModalName, NameInput
 } from './style'
 
-export default({openNext, isOpenNext, onClose}) => {
-  const nameRef = useRef(null)
+export default(props) => {
+  const {
+    onClose, nameRef,
+    openNext, isOpenNext
+  } = props
 
   const handleClick = () => { 
     const name = nameRef.current.value

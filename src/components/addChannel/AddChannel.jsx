@@ -1,10 +1,12 @@
 import MembersModal from './MembersModal'
 import styled from 'styled-components'
+import {useState, useRef} from 'react'
 import NameModal from './NameModal'
-import {useState} from 'react'
+
 
 export default({show, setShow})=> {
   const [openNext, isOpenNext] = useState(false)
+  const nameRef = useRef(null)
 
   const onClose = () => {
     setShow(false)
@@ -14,8 +16,17 @@ export default({show, setShow})=> {
   return (<>
     {show &&
       <Overlay onClick={onClose}>
-        <NameModal openNext={openNext} isOpenNext={isOpenNext} onClose={onClose}/>
-        <MembersModal onClose={onClose} openNext={openNext}/>
+        <NameModal
+          onClose={onClose} 
+          nameRef={nameRef}
+          openNext={openNext} 
+          isOpenNext={isOpenNext} 
+        />
+        <MembersModal 
+          onClose={onClose}
+          nameRef={nameRef} 
+          openNext={openNext}
+        />
       </Overlay>
     }
   </>)

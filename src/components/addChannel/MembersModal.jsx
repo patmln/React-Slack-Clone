@@ -5,9 +5,23 @@ import {
   Body2, ChannelName,
   Modal, Header
 } from './style'
+import { useChannels } from '../../contexts/ChannelsProvider'
 
-export default({openNext, onClose}) => {
+
+export default(props) => {
+  const {addChannel} = useChannels()
+  const {openNext, nameRef, onClose} = props
   const [selected, setSelected] = useState([])
+
+  const handleOnClick = () => {
+    const name = nameRef.current.value
+    if(!selected) return
+
+    addChannel({
+      'name': name,
+      'users_ids': selected
+    })
+  }
 
   return (<>
     {openNext &&
@@ -17,12 +31,12 @@ export default({openNext, onClose}) => {
           <CgClose size={20} onClick={onClose}/>
         </Header>
         <Body2>
-          <ChannelName># {name}</ChannelName>
+          <ChannelName># {nameRef.current.value}</ChannelName>
           <SearchMember/>
           <p>Users to be added:</p>
           <div></div>
         </Body2>
-        <button>Create</button>
+        <button onClick={handleOnClick}>Create</button>
       </Modal>
     }
   </>)
