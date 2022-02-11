@@ -48,7 +48,7 @@ export default() => {
   return (!auth ?
     <LoginPage>
       <Content>
-        <img src='./slack-logo.svg'/>
+        <img src='./slack-logo.svg' alt={'slack logo'}/>
         <h3>Sign in to Slack</h3>
         <p>We suggest using the <strong>email address you use at work.</strong></p> 
         <Form
@@ -107,3 +107,4 @@ const Content = styled.div`
     :hover { text-decoration: underline; }
   }
 `
+

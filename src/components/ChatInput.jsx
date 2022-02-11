@@ -1,37 +1,33 @@
-import {useMessages} from '../contexts/MessagesProvider'
 import {useUsers} from '../contexts/UsersProvider'
-import {useAuth} from '../contexts/AuthProvider'
+import {useRef, useEffect, useState} from 'react'
 import {HiPaperAirplane} from 'react-icons/hi'
 import styled from 'styled-components'
-import {useRef} from 'react'
+import {Link} from 'react-router-dom'
 
-export default() => {
-  const {user} = useAuth()
-  const inputRef = useRef(null)
-  const {selectedId} = useUsers()
-  const {sendMessage} = useMessages()
+export default(props) => {
+  const {
+    input, setInput,
+    handleClick, route
+  } = props
+  const [active, setActive] = useState(false)
 
-  const handleClick = () => {
-    let input = inputRef.current.value
-    sendMessage({
-      'receiver_id': selectedId,
-      'receiver_class': 'User',
-      'body': input
-    })
-    input = ''
-  }
+  useEffect(() => setActive(!input), [input])
 
   return (
     <ChatInput>
       <Container>
         <input 
           type='text' 
-          ref={inputRef}
           placeholder='Message here...'
+          onChange={e => setInput(e.target.value)}
         />
-        <button onClick={handleClick}>
+        <Link
+          to={route ? route : ''}
+          active={active ? 1 : 0}
+          onClick={handleClick}
+        >
           <HiPaperAirplane size={18} color='white'/>
-        </button>
+        </Link>
       </Container> 
     </ChatInput>
   )
@@ -58,11 +54,11 @@ const Container = styled.div`
     font-size: 13px;
     color: whitesmoke;
     background: transparent;
-    &:focus { outline: none; }
-    &::placeholder { color: #FFF; }
+    :focus { outline: none; }
+    ::placeholder { color: #FFF; }
   }
 
-  button {
+  a {
     width: 32px;
     border: none;
     display: flex;
@@ -72,5 +68,15 @@ const Container = styled.div`
     justify-content: center;
     background: transparent;
     transform: rotate(90deg);
-  }
+    svg {
+      opacity: ${props => 
+        props.children[1].props.
+        active ? '.25' : '1'
+      };
+      pointer-events: ${props => 
+        props.children[1].props.
+        active ? 'none' : 'auto'
+      };
+    }
 `
+

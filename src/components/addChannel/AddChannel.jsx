@@ -1,6 +1,6 @@
 import MembersModal from './MembersModal'
 import styled from 'styled-components'
-import {useState, useRef} from 'react'
+import {useState} from 'react'
 import NameModal from './NameModal'
 
 export default({show, setShow})=> {
@@ -44,3 +44,4 @@ const Overlay = styled.div`
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
 `
+

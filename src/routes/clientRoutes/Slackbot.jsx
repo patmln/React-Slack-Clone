@@ -1,6 +1,5 @@
 import ChatInput from '../../components/ChatInput'
 import styled from 'styled-components'
-import {useState} from 'react'
 
 export default() => {
   return (
@@ -26,3 +25,4 @@ const Heading = styled.h4`
   background: #1A1D21;
   outline: 1px solid #35373B;
 `
+

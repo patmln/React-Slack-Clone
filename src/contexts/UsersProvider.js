@@ -11,7 +11,6 @@ export const useUsers = () => useContext(UserContext)
 export default({children}) => {
   const {auth} = useAuth()
   const [users, setUsers] = useState([])
-  const [selectedId, setSelectedId] = useState(null)
 
   useEffect(() => {
     (async() => {
@@ -33,9 +32,9 @@ export default({children}) => {
   return (
     <UserContext.Provider value={{
       users, setUsers, getEmailById,
-      selectedId, setSelectedId
     }}>
       {children}
     </UserContext.Provider>
   )
 }
+

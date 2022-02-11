@@ -1,15 +1,14 @@
+import {useMessages} from '../contexts/MessagesProvider'
 import {useUsers} from '../contexts/UsersProvider'
-import {useEffect, useState, useRef} from 'react'
 import {findObjByKey} from '../utils/helpers'
 import styled from 'styled-components'
+import {useState, useRef} from 'react'
 import {CgClose} from 'react-icons/cg'
 
 export default() => {
   const inputRef = useRef()
-  const {
-    users, getEmailById,
-    selectedId, setSelectedId
-  } = useUsers()
+  const {users, getEmailById} = useUsers()
+  const {selectedId, setSelectedId} = useMessages()
   const [suggestions, setSuggestions] = useState([])
 
   const handleOnChange = () => {
@@ -104,7 +103,7 @@ const Image = styled.img`
 const Suggestions = styled.div`
   width: 98%;
   font-size: 15px;
-  min-height: 240px;
+  max-height: 240px;
   margin-top: -10px;
   overflow-y: scroll;
   border-radius: 8px;
@@ -129,3 +128,4 @@ const Item = styled.div`
     background-repeat: no-repeat;
   }
 `
+

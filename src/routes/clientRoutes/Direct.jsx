@@ -2,23 +2,22 @@ import {useMessages} from '../../contexts/MessagesProvider'
 import Conversations from '../../components/Conversations'
 import {useAuth} from '../../contexts/AuthProvider'
 import ChatInput from '../../components/ChatInput'
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import {BiLockAlt} from 'react-icons/bi'
 import styled from 'styled-components'
 
 export default() => {
-  const {user} = useAuth()
   const {
-    conversations, setConversations,
-    getMessages
+    setConversations,
+    receiversId, getMessages
   } = useMessages()
 
   useEffect(() => {
     (async() => {
-      const {data} = await getMessages('3') 
+      const {data} = await getMessages() 
       setConversations(data)
     })()
-  }, [])
+  }, [receiversId])
 
   return (
     <Container>
@@ -54,3 +53,4 @@ const ChannelName = styled.div`
   font-weight: 700;
   margin-left: 8px;
 `
+

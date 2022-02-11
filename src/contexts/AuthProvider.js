@@ -1,7 +1,7 @@
 import { createContext, useContext} from 'react'
 import {axiosAPI} from './axiosAPI'
 
-const AuthContext = createContext()
+const AuthContext = createContext(null)
 export const useAuth = () => useContext(AuthContext)
 
 export default({children}) => {
@@ -28,3 +28,4 @@ export default({children}) => {
     </AuthContext.Provider>
   )
 }
+

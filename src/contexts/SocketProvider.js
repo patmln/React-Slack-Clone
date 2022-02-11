@@ -14,7 +14,7 @@ export const SocketProvider = ({id, children}) => {
   const [socket, setSocket] = useState()
 
   useEffect(() => {
-    const host = 'http://localhost:5000'
+    const host = process.env.REACT_APP_HOST
     const newSocket = io(host, { query: {id} })
     setSocket(newSocket)
     return () => newSocket.close()
@@ -25,3 +25,4 @@ export const SocketProvider = ({id, children}) => {
     </SocketContext.Provider>
   )
 }
+

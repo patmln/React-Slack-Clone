@@ -1,7 +1,7 @@
 import {MdPodcasts} from 'react-icons/md'
 import styled from 'styled-components'
 
-export default({active}) => ( 
+export default() => (
   <Huddle>
     <MdPodcasts size={20}/>
     <p>batch15</p>
@@ -20,3 +20,4 @@ const Huddle = styled.div`
   p { margin-left: 10px; }
   : hover { color: #fff; }
 `
+

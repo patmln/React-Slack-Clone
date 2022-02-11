@@ -1,5 +1,3 @@
-import {useAuth} from '../contexts/AuthProvider'
-import {useNavigate} from 'react-router-dom'
 import {MdHelpOutline} from 'react-icons/md'
 import {CgSearch} from 'react-icons/cg'
 import styled from 'styled-components'
@@ -8,13 +6,6 @@ import {useState} from 'react'
 import { DropdownMenu } from './DropdownMenu'
 
 export default() => {
-  const navigate = useNavigate()
-
-  // const signOut = () => {
-  //   localStorage.removeItem('user')
-  //   location.reload()
-  // }
-
   const [open, setOpen] = useState()
 
   return (
@@ -96,3 +87,4 @@ const Image = styled.div`
     border-radius: 3px;
   }
 `
+
