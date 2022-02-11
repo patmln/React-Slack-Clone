@@ -1,7 +1,5 @@
 import {useUsers} from '../../contexts/UsersProvider'
 import styled from 'styled-components'
-import {CgClose} from 'react-icons/cg'
-import {NameInput, Image} from './style'
 import {useState} from 'react'
 import {
   uniqueArray, findObjByKey
@@ -79,3 +77,4 @@ const Item = styled.div`
     background-repeat: no-repeat;
   }
 `
+

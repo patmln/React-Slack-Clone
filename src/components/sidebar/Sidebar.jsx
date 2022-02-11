@@ -1,23 +1,20 @@
 import {useChannels} from '../../contexts/ChannelsProvider'
 import {useMessages} from '../../contexts/MessagesProvider'
-import {useAuth} from '../../contexts/AuthProvider'
 import AddChannel from '../addChannel/AddChannel'
 import {useNavigate} from 'react-router-dom'
-import {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {CgLock} from 'react-icons/cg'
 import ListItems from './ListItems'
 import TabItems from './TabItems'
+import {useState} from 'react'
 import Header from './Header'
 import Huddle from './Huddle'
 
 export default() => {
-  const {user} = useAuth()
   const navigate = useNavigate()
-  const {channels, setChannels} = useChannels()
-  const {recentDMs, setRecentDMs} = useMessages()
+  const {channels} = useChannels()
+  const {recentDMs} = useMessages()
   const [showModal, setShowModal] = useState(false)
-  const [channelOpen, setChannelOpen] = useState(false)
 
   return (
     <Sidebar>
@@ -40,7 +37,7 @@ export default() => {
         itemImg={<img src='./frog-boi.jpg'/>}
         addClick={() => navigate('new')}
       />
-      <Huddle active={channelOpen}/>
+      <Huddle/>
       <AddChannel 
         setShow={setShowModal}
         show={showModal}
@@ -56,3 +53,4 @@ const Sidebar = styled.div`
   flex-direction: column;
   outline: 1px solid #34383E;
 `
+

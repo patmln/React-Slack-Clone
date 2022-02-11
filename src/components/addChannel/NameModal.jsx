@@ -1,7 +1,6 @@
 import {CgClose} from 'react-icons/cg'
 import styled from 'styled-components'
 import {Modal, Header} from './style'
-import {useState} from 'react'
 
 export default(props) => {
   const {
@@ -87,3 +86,4 @@ const NameInput = styled.input`
   :focus { outline: none; }
   :placeholder { color: #999b9d; }
 `
+

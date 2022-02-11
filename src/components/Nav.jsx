@@ -1,37 +1,28 @@
-import {useAuth} from '../contexts/AuthProvider'
-import {useNavigate} from 'react-router-dom'
 import {MdHelpOutline} from 'react-icons/md'
 import {CgSearch} from 'react-icons/cg'
 import styled from 'styled-components'
 import {BiTime} from 'react-icons/bi'
-import {useState} from 'react'
 
-export default() => {
-  const navigate = useNavigate()
-
-  const signOut = () => {
-    localStorage.removeItem('user')
-    location.reload()
-  }
-
-  return (
-    <Nav>
-      <Main>
-        <BiTime size={22} style={{marginRight: '20px'}}/>
-        <SearchBox>
-          <input type='text' placeholder='Search Avion School' />
-          <CgSearch size={18}/>
-        </SearchBox>
-      </Main>
-      <UserContent>
-        <MdHelpOutline size={22}/>
-        <Image onClick={signOut}>
-          <img src='./frog-boi.jpg'/>
-        </Image>
-      </UserContent>
-    </Nav>
-  )
-}
+export default() => (
+  <Nav>
+    <Main>
+      <BiTime size={22} style={{marginRight: '20px'}}/>
+      <SearchBox>
+        <input type='text' placeholder='Search Avion School' />
+        <CgSearch size={18}/>
+      </SearchBox>
+    </Main>
+    <UserContent>
+      <MdHelpOutline size={22}/>
+      <Image onClick={() => {
+        localStorage.removeItem('user')
+        location.reload()
+      }}>
+        <img src='./frog-boi.jpg'/>
+      </Image>
+    </UserContent>
+  </Nav>
+)
 
 const Nav = styled.div`
   color: #FFF;
@@ -92,3 +83,4 @@ const Image = styled.div`
     border-radius: 3px;
   }
 `
+

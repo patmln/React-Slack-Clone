@@ -1,5 +1,4 @@
 import styled,{keyframes} from 'styled-components'
-import {useState} from 'react'
 
 export default({show, type, message}) => (
   <Toast show={show} fail={type === 'fail'}>
@@ -47,3 +46,4 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `
+

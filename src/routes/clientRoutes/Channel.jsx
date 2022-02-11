@@ -1,7 +1,5 @@
 import SampleThread from '../../components/SampleThread'
-import {useAuth} from '../../contexts/AuthProvider'
 import ChatInput from '../../components/ChatInput'
-import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
 const baseUrl= 'https://static.wikia.nocookie.net/theoffice/images/'
@@ -92,3 +90,4 @@ const Thread = styled.div`
   height: 70%;
   overflow: auto;
 `
+

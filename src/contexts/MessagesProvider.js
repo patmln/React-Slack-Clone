@@ -1,3 +1,4 @@
+import {useParams} from 'react-router-dom'
 import {useAuth} from './AuthProvider'
 import {axiosAPI} from './axiosAPI'
 import {
@@ -10,8 +11,9 @@ export const useMessages = () => useContext(MessageContext)
 
 export default({children}) => {
   const {auth} = useAuth()
+  const {id: receiversId} = useParams()
   const [recentDMs, setRecentDMs] = useState([])
-  const [receiversId, setReceiversId] = useState(null)
+  const [selectedId, setSelectedId] = useState(null)
   const [conversations, setConversations] = useState([])
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default({children}) => {
     })()
   }, [JSON.stringify(recentDMs)])   
 
-  const getMessages = async(receiversId) => {
+  const getMessages = async() => {
     try {
       const url = 'messages?receiver_class=User&receiver_id='
       const {data} = await axiosAPI(
@@ -49,8 +51,10 @@ export default({children}) => {
   return (
     <MessageContext.Provider 
       value={{ 
+        receiversId,
         recentDMs, setRecentDMs,
         getMessages, sendMessage,
+        selectedId, setSelectedId,
         conversations, setConversations,
       }}
     >
@@ -58,3 +62,4 @@ export default({children}) => {
     </MessageContext.Provider>
   )
 }
+
